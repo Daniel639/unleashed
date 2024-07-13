@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS unleashed;
+CREATE DATABASE unleashed;
