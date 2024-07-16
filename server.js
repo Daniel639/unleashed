@@ -12,7 +12,7 @@ const PORT = process.env.PORT || 3001;
 
 // Set up Handlebars.js engine with custom helpers
 const hbs = exphbs.create({ });
-
+/*Length of time that a user login is viable before logout after last interaction with page */
 const sess = {
   secret: 'Super secret secret',
   cookie: {

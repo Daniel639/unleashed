@@ -1,7 +1,7 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-// Create a new Sequelize model for books
+/* Create a new Sequelize model for pet*/
 class Pet extends Model {}
 
 Pet.init(
@@ -30,7 +30,7 @@ Pet.init(
     breed: {
       type: DataTypes.STRING
     },
-    // Will become `is_paperback` in table due to `underscored` flag
+    
     age: {
       type: DataTypes.INTEGER
     },
@@ -47,7 +47,7 @@ Pet.init(
     // Set to false to remove `created_at` and `updated_at` fields
     timestamps: false,
     underscored: true,
-    modelName: 'book'
+    modelName: 'pet'
   }
 );
 
