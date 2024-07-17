@@ -28,8 +28,7 @@ Comment.init(
     content: {
       type: DataTypes.STRING
     }
-    }
-  },
+    },
   {
     // Link to database connection
     sequelize,

@@ -20,7 +20,7 @@ Post.init(
         model: 'pet',
         key: 'id',
       },
-    }
+    },
     first_name: {
       type: DataTypes.STRING
     },
