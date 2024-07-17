@@ -29,7 +29,7 @@ router.post('/submit-login-form', async (req, res) => {
     if (!validPassword) {
       return res.status(400).json({ message: 'Login failed. Please try again!', success: false });
     }
-    return res.status(200).json({ message: 'Login successful', success: true, redirectUrl: '/home' });
+    return res.redirect('/home');
   } catch (err) {
     console.error('Login error:', err);
     return res.status(500).json({ message: 'An error occurred during login', success: false, error: err.message });
