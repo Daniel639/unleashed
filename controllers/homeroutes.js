@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const User = require('../models/user');
+const Pet = require ('../models/pet');
 const bcrypt=require('bcrypt');
 
 router.get('/', (req, res) => {
@@ -61,6 +62,50 @@ router.post('/submit-register-form', (req,res) => {
         .catch(err => {
             console.log("error: ", err)
         });
+});
+// New router for editing a pet 
+router.get('/edit/:id', (req, res) => {
+    console.log("Hit Edit Pet Route");
+    console.log("Pet ID:", req.params.id);
+    
+    Pet.findByPk(req.params.id)
+        .then(petData => {
+            if (!petData) {
+                console.log("No pet found with this id");
+                res.status(404).json({ message: 'No pet found with this id!' });
+                return;
+            }
+            const pet = petData.get({ plain: true });
+            console.log("Pet data:", pet);
+            res.render('edit', { pet });
+        })
+        .catch(err => {
+            console.log("Error:", err);
+            res.status(500).json(err);
+        });
+});
+
+router.post('/update-pet/:id', (req, res) => {
+    console.log("Hit Update Pet Route");
+    console.log("Pet ID:", req.params.id);
+    console.log("Update Data:", req.body);
+
+    Pet.update(req.body, {
+        where: {
+            id: req.params.id,
+        },
+    })
+    .then(petData => {
+        if (!petData[0]) {
+            res.status(404).json({ message: 'No pet found with this id!' });
+            return;
+        }
+        res.redirect('/profile');  // Adjust this to your profile route
+    })
+    .catch(err => {
+        console.log("Error:", err);
+        res.status(500).json(err);
+    });
 });
 
 router.get('/', (req, res) => {
