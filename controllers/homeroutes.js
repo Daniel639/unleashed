@@ -6,6 +6,9 @@ const bcrypt=require('bcrypt');
 router.get('/', (req, res) => {
     res.render('login');
 });
+router.get('/profile', (req, res) => {
+    res.render('profile');
+});
 router.get('/login', (req, res) => {
   res.render('login');
 });
@@ -107,9 +110,5 @@ router.post('/update-pet/:id', (req, res) => {
         res.status(500).json(err);
     });
 });
-
-router.get('/', (req, res) => {
-    res.render('home');
-  });
 
 module.exports = router;

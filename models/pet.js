@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const sequelize = require('../config/connections');
 
 // Create a new Sequelize model for books
 class Pet extends Model {}
@@ -17,7 +17,7 @@ Pet.init(
     user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'user',
+        model: 'users',
         key: 'id',
       },
     },
@@ -47,7 +47,7 @@ Pet.init(
     // Set to false to remove `created_at` and `updated_at` fields
     timestamps: false,
     underscored: true,
-    modelName: 'book'
+    modelName: 'pet'
   }
 );
 
