@@ -51,9 +51,10 @@ User.init(
     sequelize,
     // Set to false to remove `created_at` and `updated_at` fields
     timestamps: false,
+    freezeTableName: true,
     //When true , this option will set the field option on all attributes to the snake_case version of its name
     underscored: true,
-    modelName: 'user'
+    modelName: 'users'
   }
 );
 
