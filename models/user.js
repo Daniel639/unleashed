@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connections');
-
+const bcrypt = require('bcrypt');
 // Create a new Sequelize model for books
 class User extends Model {}
 
@@ -41,13 +41,20 @@ User.init(
     }
   },
   {
+    hooks: {
+      beforeCreate: async (newUserData) => {
+        newUserData.password = await bcrypt.hash(newUserData.password, 10);
+        return newUserData;
+      },
+    },
     // Link to database connection
     sequelize,
     // Set to false to remove `created_at` and `updated_at` fields
     timestamps: false,
+    freezeTableName: true,
     //When true , this option will set the field option on all attributes to the snake_case version of its name
     underscored: true,
-    modelName: 'user'
+    modelName: 'users'
   }
 );
 

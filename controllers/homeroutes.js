@@ -1,23 +1,47 @@
 const router = require('express').Router();
 const User = require('../models/user');
 const Pet = require ('../models/pet');
+const bcrypt=require('bcrypt');
 
 router.get('/', (req, res) => {
     res.render('login');
 });
-
-router.get('/home', (req, res) => {
-    console.log("Hit Home Route");
-    res.render('home');
-});
-
-router.get('/profile/:name', (req, res) => {
-    console.log("Request Params Object: ", req.params)  // { name: }
-    console.log("Hit Profile Route");
+router.get('/profile', (req, res) => {
     res.render('profile');
 });
+router.get('/login', (req, res) => {
+  res.render('login');
+});
+router.get('/home', (req, res) => {
+  res.render('home');
+});
+router.post('/submit-login-form', async (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+  try {
+    console.log("Hit login route");
+    console.log(req.body);
+    const {loginUsername, loginPassword} = req.body
+    const userData = await User.findOne({ where: { username: req.body.loginUsername } });
+    if (!userData) {
+      return res.status(404).json({ message: 'Login failed. Please try again!', success: false });
+    }
+    const validPassword = await bcrypt.compare(req.body.loginPassword, userData.password);
+    if (!validPassword) {
+      return res.status(400).json({ message: 'Login failed. Please try again!', success: false });
+    }
+    return res.redirect('/home');
+  } catch (err) {
+    console.error('Login error:', err);
+    return res.status(500).json({ message: 'An error occurred during login', success: false, error: err.message });
+  }
+});
 
-router.post(`/submit-form`, (req,res) => {
+router.get('/register', (req, res) => {
+    console.log("Hit Register Route");
+    res.render('register');
+});
+
+router.post('/submit-register-form', (req,res) => {
     // We want to capture the INCOMING data from our Profile VIEW
     console.log("Incoming Data: ", req.body);
     const { firstName, lastName, username, password } = req.body
@@ -29,6 +53,7 @@ router.post(`/submit-form`, (req,res) => {
         password: password
     }
     console.log("New User: ", newUser)
+    
     // WE want to send that data to our User's database table
     User.create(newUser)
         .then(data => {
