@@ -42,7 +42,7 @@ body {
 .form-group input {
   margin-top: 20px;
   padding: 10px;
-  color: white;
+  color: rgb(87, 87, 87);
   border: 1px solid #ccc;
   border-radius: 5px;
   text-align: center; /* Center text horizontally inside input */
