@@ -1,3 +1,70 @@
-form {
-background-color: red;
+
+.navbar {
+  background-color: #5e7e4d;
+  padding: 10px; /* Adjust overall padding as needed */
+  display: flex;
+  justify-content: center; /* Center items horizontally */
+  align-items: center;
 }
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  padding: 10px; /* Adjust individual button padding */
+  margin: 0 20px; /* Adjust margin between buttons */
+  transition: color 0.3s; /* Smooth color transition */
+}
+
+.navbar a:hover {
+  color: #ffffff80; /* Semi-transparent white on hover */
+}
+
+body {
+  background-color: #e8e2d2;
+}
+.login-form {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center;
+  align-items: center;
+  background-color: #5e7e4d;
+  padding: 10px;
+  margin: 10px auto; /* Auto margin horizontally centers the form */
+  border-radius: 30px;
+  max-width: 500px; /* Set maximum width */
+  width: 100%; /* Ensure it takes full width when screen size is smaller */
+  box-sizing: border-box; /* Include padding and border in width calculation */
+}
+
+.form-group {
+  position: relative;
+  margin-bottom: 10px; /* Increase or decrease this value for desired spacing */
+}
+.form-group input {
+  margin-top: 20px;
+  padding: 10px;
+  color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  text-align: center; /* Center text horizontally inside input */
+}
+.login-form label, a{
+  color: white;
+}
+.login-form button[type="submit"] {
+  width: 200px; /* Make the button width 100% of its parent (.form-group) */
+  padding: 12px; /* Increase padding for better button appearance */
+  background-color: #5e7e4d; /* Match .navbar background color */
+  color: white; /* Button text color */
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s; /* Smooth background color transition */
+  outline: none; /* Remove default outline */
+}
+
+.login-form button[type="submit"]:hover {
+    background-color: #4c6d3f; /* Darker background color on hover */
+}
+
