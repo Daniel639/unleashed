@@ -1,3 +1,4 @@
+
 // Get the burger menu icon
 const burger = document.querySelector('.burger');
 
