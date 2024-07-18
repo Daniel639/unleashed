@@ -60,34 +60,47 @@ router.post('/submit-register-form', (req,res) => {
             console.log("data: ", data.dataValues);
             // We need to determine HoW and or WHAT we RESPONSE back to the VIEW/frontend
            // res.status(301).json({ messege: "New User Created!"})
+            res.redirect('/add-pet')
+        })
+        .catch(err => {
+            console.log("error: ", err)
+        });
+});
+
+router.get('/add-pet', (req, res) => {
+    console.log("Hit pet-register route");
+    res.render('pet-register');
+});
+
+
+// New router for editing a pet 
+router.post('/add-pet', (req, res) => {
+    console.log("Hit add pet route");
+    const { name, type, breed, age, gender, bio } = req.body
+    // Create a temp user 
+    let newPet = {
+        name: name,
+        type: type,
+        breed: breed,
+        age: age,
+        gender: gender,
+        bio: bio
+    }
+    console.log("new pet: ", newPet)
+    
+    // WE want to send that data to our User's database table
+    Pet.create(newPet)
+        .then(data => {
+            console.log("data: ", data.dataValues);
+            // We need to determine HoW and or WHAT we RESPONSE back to the VIEW/frontend
+           // res.status(301).json({ messege: "New User Created!"})
             res.redirect('/home')
         })
         .catch(err => {
             console.log("error: ", err)
         });
 });
-// New router for editing a pet 
-router.get('/edit/:id', (req, res) => {
-    console.log("Hit Edit Pet Route");
-    console.log("Pet ID:", req.params.id);
     
-    Pet.findByPk(req.params.id)
-        .then(petData => {
-            if (!petData) {
-                console.log("No pet found with this id");
-                res.status(404).json({ message: 'No pet found with this id!' });
-                return;
-            }
-            const pet = petData.get({ plain: true });
-            console.log("Pet data:", pet);
-            res.render('edit', { pet });
-        })
-        .catch(err => {
-            console.log("Error:", err);
-            res.status(500).json(err);
-        });
-});
-
 router.post('/update-pet/:id', (req, res) => {
     console.log("Hit Update Pet Route");
     console.log("Pet ID:", req.params.id);
