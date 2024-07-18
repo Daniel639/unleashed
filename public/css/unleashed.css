@@ -1,3 +1,53 @@
 form {
 background-color: red;
 }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Basic styling for the navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+}
+
+/* Styling for the logo */
+.navbar-logo {
+    font-size: 1.5rem;
+}
+
+/* Styling for the navigation links */
+.navbar-links {
+    list-style-type: none;
+    display: flex;
+}
+
+.navbar-links li {
+    margin-right: 20px;
+}
+
+.navbar-links li a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1rem;
+}
+
+/* Styling for the burger menu icon */
+.burger {
+    display: flex;
+    flex-direction: column; /* Initially hide the burger menu on larger screens */
+    cursor: pointer;
+}
+
+.burger .line {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    margin: 5px;
+}
