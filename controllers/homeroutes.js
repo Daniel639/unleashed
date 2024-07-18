@@ -15,6 +15,9 @@ router.get('/login', (req, res) => {
 router.get('/home', (req, res) => {
   res.render('home');
 });
+router.get('/edit', (req, res) => {
+    res.render('edit');
+  });
 router.post('/submit-login-form', async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   try {
