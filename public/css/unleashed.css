@@ -6,6 +6,19 @@
   justify-content: center; /* Center items horizontally */
   align-items: center;
 }
+#navbarLinks {
+  display: none;
+  position: absolute;
+  top: 60px; /* Adjust as necessary based on your header height */
+  right: 20px;
+  background-color: #333;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+}
+  #navbarLinks.active {
+    display: block;
+  }
 
 .navbar a {
   color: white;
