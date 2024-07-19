@@ -1,0 +1,44 @@
+<!-- views/schedule-play-date.handlebars -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Schedule Play Date</title>
+</head>
+<body>
+    <h1>Schedule a Play Date</h1>
+    <!-- Form for scheduling a play date -->
+    <form action="/schedule-play-date" method="POST">
+            <!-- Dropdown to select the first pet -->
+        <div>
+            <label for="pet1Id">Pet 1:</label>
+            <select id="pet1Id" name="pet1Id" required>
+                {{#each pets}}
+                    <option value="{{this.id}}">{{this.name}}</option>
+                {{/each}}
+            </select>
+        </div>       
+        <!-- Dropdown to select the second pet -->
+        <div>
+            <label for="pet2Id">Pet 2:</label>
+            <select id="pet2Id" name="pet2Id" required>
+                {{#each pets}}
+                    <option value="{{this.id}}">{{this.name}}</option>
+                {{/each}}
+            </select>
+        </div>
+        <!-- Input field to select the date and time of the play date -->
+        <div>
+            <label for="date">Date:</label>
+            <input type="datetime-local" id="date" name="date" required>
+        </div>
+        <!-- Input field to enter the location of the play date -->
+        <div>
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" required>
+        </div>
+        <!-- Submit button-->
+        <button type="submit">Schedule Play Date</button>
+    </form>
+</body>
+</html>
