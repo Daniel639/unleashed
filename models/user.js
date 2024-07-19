@@ -1,8 +1,12 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 const bcrypt = require('bcrypt');
-// Create a new Sequelize model for books
-class User extends Model {}
+// Create a new Sequelize model for users
+class User extends Model {
+  checkPassword(loginPw) {
+    return bcrypt.compareSync(loginPw, this.password);
+  }
+}
 
 User.init(
   // Define fields/columns on model
@@ -43,11 +47,21 @@ User.init(
   {
     hooks: {
       beforeCreate: async (newUserData) => {
+        newUserData.email = await newUserData.email.toLowerCase();
         newUserData.password = await bcrypt.hash(newUserData.password, 10);
         return newUserData;
       },
-    },
-    // Link to database connection
+      beforeUpdate: async (newUserData) => {
+        if (updatedUserData._changed.has("email")) {
+        newUserData.email = await newUserData.email.toLowerCase();
+        if (updatedUserData._changed.has("password")) {
+          updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+        return newUserData;
+      }
+    }
+    }
+  },
+   // Link to database connection
     sequelize,
     // Set to false to remove `created_at` and `updated_at` fields
     timestamps: false,
@@ -55,7 +69,7 @@ User.init(
     //When true , this option will set the field option on all attributes to the snake_case version of its name
     underscored: true,
     modelName: 'users'
-  }
+   }
 );
 
 module.exports = User;

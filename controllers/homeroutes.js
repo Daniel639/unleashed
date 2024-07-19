@@ -22,15 +22,17 @@ router.post('/submit-login-form', async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
   try {
     console.log("Hit login route");
-    console.log(req.body);
-    const {loginUsername, loginPassword} = req.body
     const userData = await User.findOne({ where: { username: req.body.loginUsername } });
     if (!userData) {
       return res.status(404).json({ message: 'Login failed. Please try again!', success: false });
     }
-    const validPassword = await bcrypt.compare(req.body.loginPassword, userData.password);
+    const validPassword = await userData.checkPassword(req.body.password);
+    // If checkPassword() evaluates as false, the user will receive an error message
     if (!validPassword) {
-      return res.status(400).json({ message: 'Login failed. Please try again!', success: false });
+      res
+        .status(400)
+        .json({ message: 'Incorrect email or password, please try again' });
+      return;
     }
     return res.redirect('home');
   } catch (err) {
