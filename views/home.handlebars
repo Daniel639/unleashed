@@ -1,24 +1,8 @@
+{{#if loggedIn}}
 <h1>Home View</h1>
 <div id="pet-profiles-container">
     <!--here dynamically will be rendered pet profiles for each user-->
 </div>
-
-
-    <header class="header">
-        <button class="menu-icon">☰</button>
-        <h1>unleashed</h1>
-        <button class="code-icon">&lt;/&gt;</button>
-    </header>
-    <main class="content">
-        <aside class="sidebar user-panel">
-            <img src="https://via.placeholder.com/100" alt="User profile" class="profile-pic">
-            <h2>corgi123</h2>
-            <nav class="user-actions">
-                <a href="#">edit profile</a>
-                <a href="#">create post</a>
-                <a href="#">view playdates</a>
-            </nav>
-        </aside>
         <section class="feed">
             <article class="post">
                 <header class="post-header">
@@ -45,6 +29,9 @@
             </div>
             <!-- More playdate requests would go here -->
         </aside>
-    </main>
+ 
+  {{else}}
+  <p>Please <a href="/login">Log in</a> to your account to view the page</p>
+   {{/if}}
     <script src="script.js"></script>
 

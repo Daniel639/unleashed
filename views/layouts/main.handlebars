@@ -13,15 +13,21 @@
             <li class="nav-item">
                 <a class="nav-link" href="/home">Home</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
+             <li class="nav-item">
+                <a class="nav-link" href="/profile">Profile</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/edit">Edit</a>
             </li>
+            {{#if loggedIn}}
             <li class="nav-item">
-                <a class="nav-link" href="/profile">Profile</a>
+                |<button id="logoutBtn">Logout</button>
             </li>
+            {{else}}
+             <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+            </li>
+            {{/if}}
         </ul>
     </div>
 
@@ -32,11 +38,9 @@
             <span></span>
         </div>
     </nav>
-
-    <main>
-        <!-- Your content here -->
+     <main>
+        {{{body}}}
     </main>
-
     <script>
         function toggleMenu() {
             const menu = document.getElementById('offScreenMenu');
@@ -45,11 +49,7 @@
             hamMenu.classList.toggle('active');
         }
     </script>
-
-    <main>
-        {{{body}}}
-    </main>
-
+    <script src="/js/logout.js"></script>
     <script src="/js/router.js"></script>
     <script src="../../public/js/logic.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-28F5LHYrdZ3Zl4IYLOzMvp6eL4v2s+MUHH8sSPWTZn/QW7WtQTXl0EZs/U6A/SK/" crossorigin="anonymous"></script>

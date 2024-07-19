@@ -7,46 +7,54 @@ router.get('/', (req, res) => {
     res.render('login');
 });
 router.get('/profile', (req, res) => {
-    res.render('profile');
+    res.render('profile', {
+        loggedIn: req.session.loggenIn
+    });
 });
 router.get('/login', (req, res) => {
   res.render('login');
 });
 router.get('/home', (req, res) => {
-  res.render('home');
+  res.render('home', {
+    loggedIn: req.session.loggenIn
+  });
 });
 router.get('/edit', (req, res) => {
-    res.render('edit');
+    res.render('edit', {
+        loggedIn: req.session.loggenIn
+    });
   });
-router.post('/submit-login-form', async (req, res) => {
-  res.setHeader('Content-Type', 'application/json');
-  try {
-    console.log("Hit login route");
-    const userData = await User.findOne({ where: { username: req.body.loginUsername } });
-    if (!userData) {
-      return res.status(404).json({ message: 'Login failed. Please try again!', success: false });
-    }
-    const validPassword = await userData.checkPassword(req.body.password);
+  router.post('/submit-login-form', async (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    try {
+      console.log("Hit login route");
+      console.log(req.body);
+      const {loginUsername, loginPassword} = req.body
+      const userData = await User.findOne({ where: { username: req.body.loginUn } });
+      if (!userData) {
+        return res.status(404).json({ message: 'Login failed. Please try again!', success: false });
+      }
+      const validPassword = await userData.checkPassword(req.body.loginPw);
     // If checkPassword() evaluates as false, the user will receive an error message
     if (!validPassword) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password, please try again' });
+      res.status(400).json({ message: 'Incorrect email or password, please try again' });
       return;
     }
-    return res.redirect('home');
-  } catch (err) {
-    console.error('Login error:', err);
-    return res.status(500).json({ message: 'An error occurred during login', success: false, error: err.message });
-  }
-});
+      return req.session.save(()=>{
+        req.session.loggenIn=true,
+        res.redirect('/home')
+        })
+    } catch (err) {
+      console.error('Login error:', err);
+      return res.status(500).json({ message: 'An error occurred during login', success: false, error: err.message });
+    }
+  });
 
 router.get('/register', (req, res) => {
     console.log("Hit Register Route");
     res.render('register');
 });
-
-router.post('/submit-register-form', (req,res) => {
+router.post('/submit-register-form',(req,res) => {
     // We want to capture the INCOMING data from our Profile VIEW
     console.log("Incoming Data: ", req.body);
     const { firstName, lastName, username, password } = req.body
@@ -58,32 +66,39 @@ router.post('/submit-register-form', (req,res) => {
         password: password
     }
     console.log("New User: ", newUser)
-    
     // WE want to send that data to our User's database table
     User.create(newUser)
         .then(data => {
             console.log("data: ", data.dataValues);
             // We need to determine HoW and or WHAT we RESPONSE back to the VIEW/frontend
            // res.status(301).json({ messege: "New User Created!"})
-            res.redirect('/add-pet')
+           //after user successfully registered - redirect to add pet profile page.
+           req.session.save(()=>{
+            req.session.loggenIn=true;
+            res.redirect(`/add-pet`)
+        })       
         })
         .catch(err => {
             console.log("error: ", err)
         });
 });
 
-router.get('/add-pet', (req, res) => {
+router.get(`/add-pet`, (req, res) => {
     console.log("Hit pet-register route");
-    res.render('pet-register');
+    res.render('pet-register', {
+       loggedIn: req.session.loggenIn
+    }
+    );
 });
 
 
 // New router for editing a pet 
-router.post('/add-pet', (req, res) => {
+router.post(`/add-pet/`, (req, res) => {
     console.log("Hit add pet route");
     const { name, type, breed, age, gender, bio } = req.body
     // Create a temp user 
     let newPet = {
+        user_id: userId,
         name: name,
         type: type,
         breed: breed,
@@ -128,5 +143,13 @@ router.post('/update-pet/:id', (req, res) => {
         res.status(500).json(err);
     });
 });
-
+router.post('/logout', (req, res) => {
+    if (req.session.loggenIn) {
+        req.session.destroy(()=> {
+            res.status(202).end();
+        })
+    } else {
+        res.status(404).end();
+    }
+    })
 module.exports = router;
