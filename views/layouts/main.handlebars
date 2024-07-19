@@ -8,54 +8,43 @@
     <link rel="stylesheet" href="/css/unleashed.css">
 </head>
 <body>
-    <div class="off-screen-menu">
-        <ul>
-            <li>home</li>
-            <li>login</li>
-            <li>edit</li>
-            <li>profile</li>
+    <div class="off-screen-menu" id="offScreenMenu">
+        <ul class="nav-links">
+            <li class="nav-item">
+                <a class="nav-link" href="/home">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/edit">Edit</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/profile">Profile</a>
+            </li>
         </ul>
     </div>
 
     <nav>
-        <div class="ham-menu">
+        <div class="ham-menu" id="hamMenu" onclick="toggleMenu()">
             <span></span>
             <span></span>
             <span></span>
         </div>
     </nav>
-   
-    <div class="pos-f-t">
-        <div class="collapse" id="navbarToggleExternalContent">
-            <div class="bg-dark p-4">
-                <h4 class="text-white">Collapsed content</h4>
-                <span class="text-muted">Toggleable via the navbar brand.</span>
-            </div>
-        </div> 
-        <nav class="navbar navbar-dark bg-dark">
-            <div class="container-fluid">
-                <button onclick="toggleMenu()" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarToggleExternalContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/home">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/login">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/edit">Edit</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/profile">Profile</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
+
+    <main>
+        <!-- Your content here -->
+    </main>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('offScreenMenu');
+            const hamMenu = document.getElementById('hamMenu');
+            menu.classList.toggle('active');
+            hamMenu.classList.toggle('active');
+        }
+    </script>
 
     <main>
         {{{body}}}
