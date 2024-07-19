@@ -3,10 +3,48 @@
     <!--here dynamically will be rendered pet profiles for each user-->
 </div>
 
-<div id="feed-container">
-     <!--here dynamically will be rendered posts of all the users-->
-</div>
 
-<div id="playdates-container">
-     <!--here dynamically will be rendered playdates of all the users-->
-</div>
+    <header class="header">
+        <button class="menu-icon">☰</button>
+        <h1>unleashed</h1>
+        <button class="code-icon">&lt;/&gt;</button>
+    </header>
+    <main class="content">
+        <aside class="sidebar user-panel">
+            <img src="https://via.placeholder.com/100" alt="User profile" class="profile-pic">
+            <h2>corgi123</h2>
+            <nav class="user-actions">
+                <a href="#">edit profile</a>
+                <a href="#">create post</a>
+                <a href="#">view playdates</a>
+            </nav>
+        </aside>
+        <section class="feed">
+            <article class="post">
+                <header class="post-header">
+                    <img src="https://via.placeholder.com/50" alt="User avatar" class="avatar">
+                    <span class="username">@corgi123</span>
+                    <button class="schedule-btn">schedule playdate</button>
+                </header>
+                <img src="https://via.placeholder.com/400x300" alt="Post image" class="post-image">
+                <p class="post-content">Welcome to Unleashed, a social media platform for pet lovers. 
+                Share photos and stories of your pets and connect with fellow enthusiasts. 
+                Join Unleashed to celebrate your furry friends!</p>
+            </article>
+            <!-- More posts would go here -->
+        </section>
+        <aside class="sidebar playdate-panel">
+            <h2>playdates:</h2>
+            <div class="playdate-request">
+                <img src="https://via.placeholder.com/50" alt="User avatar" class="avatar">
+                <span class="username">@user123</span>
+                <div class="action-buttons">
+                    <button class="accept-btn">accept</button>
+                    <button class="decline-btn">decline</button>
+                </div>
+            </div>
+            <!-- More playdate requests would go here -->
+        </aside>
+    </main>
+    <script src="script.js"></script>
+
