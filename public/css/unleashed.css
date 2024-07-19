@@ -1,83 +1,213 @@
+body {
+  background-color: #e8e2d2; /* Consistent background color */
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+
+nav {
+  padding: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  background-color: #5e7e4d; /* Green background for the header */
+  position: relative; /* Ensure relative positioning for header */
+  margin-bottom: 20px; /* Margin to separate from content below */
+  z-index: 1000; /* Ensure nav is on top of other content */
+}
+
+.off-screen-menu {
+  background-color: #5e7e4d; /* Green background for the menu */
+  width: calc(100% - 40px); /* Full width minus left and right margins */
+  max-width: 250px; /* Maximum width of the menu */
+  position: fixed;
+  top: 80px; /* 20px margin below the header (assuming header is 60px tall) */
+  left: -250px; /* Initially hidden off-screen */
+  bottom: 20px; /* Margin from the bottom */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch; /* Stretch items to fill the width */
+  text-align: center;
+  font-size: 1.5rem;
+  transition: left 0.3s ease;
+  border-radius: 25px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional shadow for better visibility */
+  padding: 10px; /* Padding for spacing inside the menu */
+  overflow-y: auto; /* Allow scrolling if content exceeds the height */
+  max-height: calc(100vh - 100px); /* Max height to keep the menu within the viewport */
+}
+
+.off-screen-menu.active {
+  left: 20px; /* Margin from the left when active */
+}
+
+.off-screen-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.off-screen-menu li {
+  width: 100%;
+  margin: 10px 0; /* Adjust margin for spacing between items */
+  color: white;
+}
+
+.off-screen-menu a {
+  color: white;
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  padding: 15px;
+  transition: background-color 0.3s;
+}
+
+.off-screen-menu a:hover {
+  background-color: #485e3b;
+  border-radius: 5px;
+}
+
+
+.ham-menu {
+  height: 30px;
+  width: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  cursor: pointer;
+  position: relative; /* Ensure proper positioning */
+  z-index: 1001; /* Ensure the hamburger menu is on top of the other content */
+}
+
+.ham-menu span {
+  height: 4px;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+.ham-menu.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+
+.ham-menu.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.ham-menu.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
 
 .navbar {
-  background-color: #5e7e4d;
-  padding: 10px; /* Adjust overall padding as needed */
+  background-color: #5e7e4d; /* Green background for navbar */
+  padding: 10px;
   display: flex;
-  justify-content: center; /* Center items horizontally */
+  justify-content: center;
   align-items: center;
 }
+
 #navbarLinks {
   display: none;
   position: absolute;
-  top: 60px; /* Adjust as necessary based on your header height */
+  top: 60px; /* Adjust based on header height */
   right: 20px;
-  background-color: #333;
+  background-color: #333; /* Dark background for dropdown */
   padding: 10px;
   border-radius: 5px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-  #navbarLinks.active {
-    display: block;
-  }
+
+#navbarLinks.active {
+  display: block;
+}
 
 .navbar a {
   color: white;
   text-decoration: none;
-  padding: 10px; /* Adjust individual button padding */
-  margin: 0 20px; /* Adjust margin between buttons */
-  transition: color 0.3s; /* Smooth color transition */
+  padding: 10px;
+  margin: 0 20px;
+  transition: color 0.3s;
 }
 
 .navbar a:hover {
-  color: #ffffff80; /* Semi-transparent white on hover */
+  color: #ffffff80;
 }
 
-body {
-  background-color: #e8e2d2;
-}
 .login-form {
   display: flex;
-  flex-direction: column; /* Stack items vertically */
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #5e7e4d;
+  background-color: #5e7e4d; /* Green background for the form */
   padding: 10px;
-  margin: 10px auto; /* Auto margin horizontally centers the form */
+  margin: 10px auto;
   border-radius: 30px;
-  max-width: 500px; /* Set maximum width */
-  width: 100%; /* Ensure it takes full width when screen size is smaller */
-  box-sizing: border-box; /* Include padding and border in width calculation */
+  max-width: 500px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .form-group {
   position: relative;
-  margin-bottom: 10px; /* Increase or decrease this value for desired spacing */
+  margin-bottom: 10px;
 }
+
 .form-group input {
   margin-top: 20px;
   padding: 10px;
   color: rgb(87, 87, 87);
   border: 1px solid #ccc;
   border-radius: 5px;
-  text-align: center; /* Center text horizontally inside input */
+  text-align: center;
 }
-.login-form label, a{
+
+.login-form label,
+.login-form a {
   color: white;
 }
+
 .login-form button[type="submit"] {
-  width: 200px; /* Make the button width 100% of its parent (.form-group) */
-  padding: 12px; /* Increase padding for better button appearance */
-  background-color: #5e7e4d; /* Match .navbar background color */
-  color: white; /* Button text color */
+  width: 200px;
+  padding: 12px;
+  background-color: #5e7e4d; /* Matching green */
+  color: white;
   border: none;
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
-  transition: background-color 0.3s; /* Smooth background color transition */
-  outline: none; /* Remove default outline */
+  transition: background-color 0.3s;
+  outline: none;
 }
 
 .login-form button[type="submit"]:hover {
-    background-color: #4c6d3f; /* Darker background color on hover */
+  background-color: #4c6d3f; /* Slightly darker green */
 }
 
+/* Media Queries for Responsive Layout */
+@media (max-width: 768px) {
+  .off-screen-menu {
+    top: 80px; /* Adjust top margin to be below header */
+    left: 0; /* Show menu on the left */
+    width: 100%; /* Full width for smaller screens */
+    max-width: none; /* Remove max-width */
+    height: auto; /* Adjust height based on content */
+    bottom: 0; /* Remove bottom margin for stacking */
+    padding: 20px; /* Add padding for content spacing */
+  }
+
+  .login-form {
+    width: 90%; /* Make the login form take up most of the width */
+    margin: 10px auto; /* Center the form */
+  }
+}
+
+/* Stack menu and login form on narrow screens */
+@media (max-width: 480px) {
+  .login-form {
+    margin-top: 10px;
+  }
+
+  .off-screen-menu {
+    top: 60px; /* Adjust to be just below the header */
+  }
+}
