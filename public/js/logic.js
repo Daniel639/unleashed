@@ -1,3 +1,4 @@
+
 const currentUrl = window.location.href;
     // Extract the ID from the URL
     const urlParts = currentUrl.split('/');
@@ -40,5 +41,3 @@ const currentUrl = window.location.href;
         });
       
 
-
-        

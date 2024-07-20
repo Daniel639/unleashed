@@ -9,8 +9,8 @@
         <p id="pet-bio">Bio: {{bio}}</p> 
         {{/with}}
         {{>pet-actions}}
-</div>
-        <section class="feed">
+        
+ <section class="feed">
             {{#each posts as |post|}}
             <li>
             <div class="post-card">
@@ -28,12 +28,14 @@
         </section>
         <!--<aside class="sidebar playdate-panel">
             <h2>playdates:</h2>
-            <div class="playdate-request">
-                <img src="https://via.placeholder.com/50" alt="User avatar" class="avatar">
-                <span class="username">@user123</span>
-                <div class="action-buttons">
-                    <button class="accept-btn">accept</button>
-                    <button class="decline-btn">decline</button>
+            {{#each playdateRequests}}
+                <div class="playdate-request">
+                    <img src="{{this.avatar}}" alt="User avatar" class="avatar">
+                    <span class="username">@{{this.username}}</span>
+                    <div class="action-buttons">
+                        <button class="accept-btn">accept</button>
+                        <button class="decline-btn">decline</button>
+                    </div>
                 </div>
             </div>
             More playdate requests would go here 
