@@ -1,3 +1,4 @@
+{{#if loggedIn}} 
 <header class="bg-green-700 p-4 flex justify-between items-center">
   <button class="text-white text-3xl">☰</button>
   <h1 class="text-white text-2xl font-bold">unleashed</h1>
@@ -53,3 +54,6 @@
     </div>
   </div>
 </div>
+{{else}}
+  <p>Please <a href="/login">Log in</a> to your account to view the page</p>
+   {{/if}}

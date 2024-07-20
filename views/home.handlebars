@@ -1,25 +1,25 @@
+{{#if loggedIn}}
 <h1>Home View</h1>
-<div id="pet-cards-container">
-    <!--here dynamically will be rendered pet profiles for each user-->
+<div id="pet-profiles-container">
+   <h1>My pets</h1>
+   <ul>
+    {{#each pets as |pet|}}
+    <li>
+        <img src="https://via.placeholder.com/100" alt="User profile" class="profile-pic">
+        <h2 class="pet-name">{{pet.name}}, {{pet.breed}}</h2>
+        <p id="age">Age: {{pet.age}}<p>
+        <p id="gender">{{pet.gender}}</p>
+        <p id="pet-bio">{{pet.bio}}</p> 
+        {{>pet-actions}}
+    </li>
+    {{/each}}
+   </ul>
+   <button id="addPetBtn">Add Pet</button>
 </div>
 
-
-    <header class="header">
-        <button class="menu-icon">☰</button>
-        <h1>unleashed</h1>
-        <button class="code-icon">&lt;/&gt;</button>
-    </header>
-    <main class="content">
-        <aside class="sidebar user-panel">
-            <img src="https://via.placeholder.com/100" alt="User profile" class="profile-pic">
-            <h2>corgi123</h2>
-            <nav class="user-actions">
-                <a href="#">edit profile</a>
-                <a href="#">create post</a>
-                <a href="#">view playdates</a>
-            </nav>
-        </aside>
-        <section class="feed">
+        <!--add add-pet btn and switch-pet profile btn
+            
+            <section class="feed">
             <article class="post">
                 <header class="post-header">
                     <img src="https://via.placeholder.com/50" alt="User avatar" class="avatar">
@@ -31,7 +31,7 @@
                 Share photos and stories of your pets and connect with fellow enthusiasts. 
                 Join Unleashed to celebrate your furry friends!</p>
             </article>
-            <!-- More posts would go here -->
+             More posts would go here
         </section>
         <aside class="sidebar playdate-panel">
             <h2>playdates:</h2>
@@ -43,8 +43,29 @@
                     <button class="decline-btn">decline</button>
                 </div>
             </div>
-            <!-- More playdate requests would go here -->
-        </aside>
-    </main>
-    <script src="script.js"></script>
+            More playdate requests would go here 
+        </aside>-->
+ 
+  {{else}}
+ {{> login-msg}}
+   {{/if}}
+    <script>const addPet=document.getElementById('addPetBtn');
+addPet.addEventListener('click', function () {
+    fetch('/add-pet', {
+        method: 'GET',
+        credentials: 'same-origin' 
+    })
+    .then(response => {
+        if (response.ok) {
+            // Redirect or handle logout success on the client side
+            window.location.href = '/add-pet';  // Redirect to login page
+        } else {
+            throw new Error('Cannot add a new pet');
+        }
+    })
+    .catch(error => {
+        console.error(' error:', error);
+        // Handle error conditionally
+    });
+})</script>
 
