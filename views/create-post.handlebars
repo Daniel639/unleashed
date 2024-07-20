@@ -1,19 +1,7 @@
 <div class="row mt-4">
   <div class="col-md-6">
     <h3>Add a new pet</h3>
-    <form class="add-pet-form" action="/add-pet/:id" method="POST">
-      <div class="form-group">
-        <label for="pet-name">Pet Name:</label>
-        <input class="form-input" type="text" id="pet-name" name="name" value="{{pet.name}}" required />
-      </div>
-      <div class="form-group">
-        <label for="pet-species">Species:</label>
-        <input class="form-input" type="text" id="pet-species" name="type"/>
-      </div>
-      <div class="form-group">
-        <label for="pet-breed">Breed:</label>
-        <input class="form-input" type="text" id="pet-breed" name="breed"/>
-      </div>
+    <form class="add-pet-form" action="/create-post" method="POST">
       <div class="form-group">
         <label for="pet-age">Age:</label>
         <input class="form-input" type="number" id="pet-age" name="age" />
@@ -33,4 +21,3 @@
     </form>
   </div>
 </div>
-<script src="../public/js/router.js"></script>

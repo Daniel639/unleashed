@@ -30,6 +30,7 @@ User.init(
         type: DataTypes.STRING,
         // prevents null values
         allowNull: false,
+        unique: true,
         // will only allow alphanumeric characters
         validate: {
           isAlphanumeric: true,

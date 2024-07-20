@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connections');
+const sequelize = require('../config/connection');
 
 // Create a new Sequelize model for books
 class Post extends Model {}
@@ -17,7 +17,7 @@ Post.init(
     pet_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'pet',
+        model: 'pets',
         key: 'id',
       },
     },

@@ -25,7 +25,7 @@
             </li>
             {{else}}
              <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
+                <a class="nav-link" href="/">Login</a>
             </li>
             {{/if}}
         </ul>
@@ -41,6 +41,7 @@
      <main>
         {{{body}}}
     </main>
+    
     <script>
         function toggleMenu() {
             const menu = document.getElementById('offScreenMenu');
@@ -48,31 +49,11 @@
             menu.classList.toggle('active');
             hamMenu.classList.toggle('active');
         }
-        const logoutBtn=document.getElementById('logoutBtn');
-logoutBtn.addEventListener('click', function () {
-    fetch('/logout', {
-        method: 'POST',
-        credentials: 'same-origin' // Ensure cookies are sent with the request
-    })
-    .then(response => {
-        if (response.ok) {
-            // Redirect or handle logout success on the client side
-            window.location.href = '/login'; // Redirect to login page
-        } else {
-            throw new Error('Logout failed');
-        }
-    })
-    .catch(error) {
-        console.error('Logout error:', error);
-        // Handle error conditionally
-    });
-})// grab reference to something on the page 
-// Grab reference to each Input
-// We would create a User object = {}
-// send the user object in the request BODY object
     </script>
-    <script src="../../public/js/router.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-28F5LHYrdZ3Zl4IYLOzMvp6eL4v2s+MUHH8sSPWTZn/QW7WtQTXl0EZs/U6A/SK/" crossorigin="anonymous"></script>
+    <script src="/js/logout.js"></script>
+     <script src="/js/logic.js"></script>
+    <script src="/js/router.js"></script>
+     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-28F5LHYrdZ3Zl4IYLOzMvp6eL4v2s+MUHH8sSPWTZn/QW7WtQTXl0EZs/U6A/SK/" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-lB9jp5K1GzYG5iv4ErxsYqAxNJqhoJGhCvw5OrSLyT7Grn5p9/HM4S+5vGUuJMoP" crossorigin="anonymous"></script>
 </body>
 </html>
