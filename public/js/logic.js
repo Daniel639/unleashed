@@ -6,7 +6,7 @@ const currentUrl = window.location.href;
     localStorage.setItem('id', id);
 
     console.log(id);
-    const addPet=document.getElementById('addPetBtn');
+    const addPet=document.getElementById('add-pet-btn');
     addPet.addEventListener('click', function () {
     fetch(`/add-pet/${id}`, {
         method: 'GET',
@@ -26,4 +26,19 @@ const currentUrl = window.location.href;
         // Handle error conditionally
     });
     });
-const currentPet=document.eve
+
+
+    
+        const btns = document.querySelectorAll('.view-profile-btn');
+
+        btns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const userId = btn.getAttribute('data-user-id');
+                const petId = btn.getAttribute('data-pet-id');
+                window.location.href = `/home/${userId}/${petId}`; // Redirect to pet details page
+            });
+        });
+      
+
+
+        

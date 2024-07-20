@@ -1,6 +1,7 @@
 const User = require('./users');
 const Pet = require('./pets');
 const Post = require('./posts');
+const Comment = require('./commentss');
 
 User.hasMany(Pet, {
     foreignKey: 'user_id',
@@ -20,6 +21,21 @@ Post.belongsTo(Pet, {
     foreignKey: 'pet_id'
 });
 
+Post.hasMany(Comment, {
+    foreignKey: 'post_id',
+    onDelete: 'CASCADE'
+});
 
+Comment.belongsTo(Post, {
+    foreignKey: 'post_id'
+});
 
-module.exports = {User, Pet, Post};
+Pet.hasMany(Comment, {
+    foreignKey: 'pet_id',
+    onDelete: 'CASCADE'
+});
+Comment.belongsTo(Pet, {
+    foreignKey: 'pet_id'
+});
+
+module.exports = {User, Pet, Post, Comment};

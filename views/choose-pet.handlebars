@@ -1,35 +1,12 @@
 <h1>Choose pet profile</h1>
-<ul id="pet-profiles">
+<ul id="pets-list">
         {{#each pets as |pet|}}
     <li>
         <img src="https://via.placeholder.com/100" alt="User profile" class="profile-pic">
         <h2 class="pet-name">{{pet.name}}, {{pet.breed}}</h2>
+        <button class="view-profile-btn" data-pet-id="{{pet.id}}" data-user-id="{{pet.user_id}}">Open</button>
     </li>
     {{/each}}
 </ul>
-<button id="addPetBtn">Add Pet</button>
+<button id="add-pet-btn">Add Pet</button>
 
-
-<script>document.addEventListener('DOMContentLoaded', () => {
-    const userList = document.getElementById('user-list');
-    
-    userList.addEventListener('click', async (event) => {
-        if (event.target.classList.contains('btn-view-details')) {
-            const userId = event.target.getAttribute('data-user-id');
-
-            try {
-                const response = await fetch(`/users/${userId}`);
-                if (!response.ok) {
-                    throw new Error('Failed to fetch user details');
-                }
-                const userData = await response.json();
-                console.log('User details:', userData);
-                // Handle the received user data as needed
-            } catch (error) {
-                console.error('Error fetching user details:', error);
-                // Handle error
-            }
-        }
-    });
-});
-</script>

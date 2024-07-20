@@ -1,11 +1,13 @@
 {{#if loggedIn}}
 <h1>Home View</h1>
 <div id="pet-profile-container">
+    {{#with pet}}
         <img src="https://via.placeholder.com/100" alt="User profile" class="profile-pic">
-        <h2 class="pet-name">{{pet.name}}, {{pet.breed}}</h2>
-        <p id="age">Age: {{pet.age}}<p>
-        <p id="gender">{{pet.gender}}</p>
-        <p id="pet-bio">{{pet.bio}}</p> 
+        <h2 class="pet-name">{{name}}, {{breed}}</h2>
+        <p id="age">Age: {{age}}<p>
+        <p id="gender">Gender: {{gender}}</p>
+        <p id="pet-bio">Bio: {{bio}}</p> 
+        {{/with}}
         {{>pet-actions}}
 </div>
         <section class="feed">

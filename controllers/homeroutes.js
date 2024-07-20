@@ -2,6 +2,7 @@ const router = require('express').Router();
 const User = require('../models/users');
 const Pet = require ('../models/pets');
 const Post= require ('../models/posts');
+const Comment= require ('../models/comments');
 const bcrypt=require('bcrypt');
 const userAuth = require('../utils/auth');
 //add a page user sees after login, that will display all the pets belonging to that user and show "choose pet profile msg 
@@ -26,11 +27,12 @@ router.post('/register/:username', async (req,res) => {
     }
     console.log("New User: ", newUser)
     // WE want to send that data to our User's database table
-    await User.create(newUser);
+  const dbUser = await User.create(newUser);
+  console.log("DB user:", dbUser);
             // We need to determine HoW and or WHAT we RESPONSE back to the VIEW/frontend
            // res.status(301).json({ messege: "New User Created!"})
            //after user successfully registered - redirect to add pet profile page.
-           req.session.user=data.dataValues;
+           req.session.user=dbUser.dataValues;
            let id=req.session.user.id;
            //console.log ( req.session.user);
            req.session.save(()=>{
@@ -87,7 +89,7 @@ router.post('/login/:loginUn', async (req, res) => {
     console.log(pets);
     res.render('choose-pet', {
        pets,
-       loggedIn: req.session.loggenIn})
+       loggedIn: req.session.loggedIn})
 } catch(err) {
     console.log("error: ", err)
 }
@@ -95,23 +97,26 @@ router.post('/login/:loginUn', async (req, res) => {
 
   //route to render home page
   router.get('/home/:id/:petId', async (req, res) => {
-    try{
-    const petsData = await Pet.findAll({ where: {user_id: req.params.id}});
-    console.log(petsData);
-    const pets = petsData.map((pet) => pet.get({ plain: true }));
-    console.log(pets);
-    const postsData= await Post.findAll();
-    console.log(postsData);
-    const posts = postsData.map((post) => post.get({ plain: true }));
-    console.log(posts);
-    res.render('home', {
-        pets: pets,
-         posts: posts,
-        loggedIn: req.session.loggenIn})
-} catch(err) {
-    console.log("error: ", err)
-}
-});
+    try {
+        const petId=req.params.petId;
+       const  petData=await Pet.findByPk(petId);
+       console.log(petData);
+       const petString = JSON.stringify(petData);
+       const pet = JSON.parse(petString);
+       console.log("Pet data for template: ", pet);
+       const postsData= await Post.findAll({where: {pet_id: petId }});
+       const posts = postsData.map((post) => post.get({ plain: true }));
+       console.log("Posts data for template: ", posts);
+        // Render the page with pet details and posts
+        res.render('home', { posts, 
+            pet,
+            loggedIn: req.session.loggenIn
+         }); // Adjust 'petDetails' to your Handlebars template
+      } catch (error) {
+        console.error('Error fetching pet and posts:', error);
+        res.status(500).send('Internal Server Error');
+      }
+    });
 //route to display add-pet form
 router.get(`/add-pet/:id`, async (req, res) => {
     try {
@@ -127,6 +132,7 @@ router.post(`/add-pet/:id`, async (req, res) => {
    try { console.log("Hit add pet post  route");
 
         const { name, type, breed, age, gender, bio } = req.body
+        console.log(req.session.user)
         // Create a temp user 
         let newPet = {
             user_id: req.session.user.id,
@@ -141,10 +147,10 @@ router.post(`/add-pet/:id`, async (req, res) => {
     
         // WE want to send that data to our User's database table
         await Pet.create(newPet)
-        let id=newPet.user_id;
+        let userId=newPet.user_id;
         // We need to determine HoW and or WHAT we RESPONSE back to the VIEW/frontend
         // res.status(301).json({ messege: "New User Created!"})
-        res.redirect(`/home/${id}`)
+        res.redirect(`/choose-pet/${userId}`)
     } catch(err) {
             console.log("error: ", err)
         };
@@ -183,13 +189,16 @@ router.get('/edit', (req, res) => {
 
     
 
-router.post('/logout', (req, res) => {
-    if (req.session.loggenIn) {
-        req.session.destroy(()=> {
+router.post('/logout', async (req, res) => {
+   try{ if (req.session.loggenIn) {
+            req.session.destroy(()=> {
             res.status(202).end();
-        })
-    } else {
-        res.status(404).end();
+            })
+        } else {
+            res.status(404).end();
+        };
+    } catch(err) {
+        console.log("error: ", err)
     }
-    })
+});
 module.exports = router;

@@ -21,18 +21,10 @@ Post.init(
         key: 'id',
       },
     },
-    first_name: {
-      type: DataTypes.STRING
-    },
-    last_name: {
-      type: DataTypes.STRING
-    },
-    username: {
-      type: DataTypes.STRING
-    },
-    password: {
-      type: DataTypes.STRING
-    }
+   content: {
+    type: DataTypes.STRING,
+    allowNull: false
+   }
   },
   {
     // Link to database connection
@@ -40,7 +32,7 @@ Post.init(
     // Set to false to remove `created_at` and `updated_at` fields
     timestamps: false,
     underscored: true,
-    modelName: 'post'
+    modelName: 'posts'
   }
 );
 

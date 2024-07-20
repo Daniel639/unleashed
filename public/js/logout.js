@@ -1,4 +1,4 @@
-const logoutBtn=document.getElementById('logoutBtn');
+const logoutBtn=document.getElementById('logout-btn');
 logoutBtn.addEventListener('click', function () {
     fetch('/logout', {
         method: 'POST',
@@ -7,7 +7,7 @@ logoutBtn.addEventListener('click', function () {
     .then(response => {
         if (response.ok) {
             // Redirect or handle logout success on the client side
-            window.location.href = '/login'; // Redirect to login page
+            window.location.href = '/'; // Redirect to login page
         } else {
             throw new Error('Logout failed');
         }
