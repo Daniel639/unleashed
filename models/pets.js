@@ -47,7 +47,8 @@ Pet.init(
     // Set to false to remove `created_at` and `updated_at` fields
     timestamps: false,
     underscored: true,
-    modelName: 'pet'
+    freezeTableName: true,
+    modelName: 'pets'
   }
 );
 

@@ -1,0 +1,12 @@
+<h1>Choose pet profile</h1>
+<ul id="pets-list">
+        {{#each pets as |pet|}}
+    <li>
+        <img src="https://via.placeholder.com/100" alt="User profile" class="profile-pic">
+        <h2 class="pet-name">{{pet.name}}, {{pet.breed}}</h2>
+        <button class="view-profile-btn" data-pet-id="{{pet.id}}" data-user-id="{{pet.user_id}}">Open</button>
+    </li>
+    {{/each}}
+</ul>
+<button id="add-pet-btn">Add Pet</button>
+

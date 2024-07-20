@@ -14,14 +14,20 @@
                 <a class="nav-link" href="/home">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/login">Login</a>
+                <a class="nav-link" href="/about">About</a>
             </li>
+               <li class="nav-item">
+                <a class="nav-link" href="/user-profile">User Profile</a>
+            </li>
+            {{#if loggedIn}}
             <li class="nav-item">
-                <a class="nav-link" href="/edit">Edit</a>
+                |<button id="logout-btn">Logout</button>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/profile">Profile</a>
+            {{else}}
+             <li class="nav-item">
+                <a class="nav-link" href="/">Login</a>
             </li>
+            {{/if}}
         </ul>
     </div>
 
@@ -32,11 +38,11 @@
             <span></span>
         </div>
     </nav>
-
-    <main>
+     <main>
         {{{body}}}
     </main>
-<script>
+    
+    <script>
         function toggleMenu() {
             const menu = document.getElementById('offScreenMenu');
             const hamMenu = document.getElementById('hamMenu');
@@ -44,9 +50,9 @@
             hamMenu.classList.toggle('active');
         }
     </script>
+    <script src="/js/logout.js"></script>
     <script src="/js/router.js"></script>
-    <script src="../../public/js/logic.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-28F5LHYrdZ3Zl4IYLOzMvp6eL4v2s+MUHH8sSPWTZn/QW7WtQTXl0EZs/U6A/SK/" crossorigin="anonymous"></script>
+     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-28F5LHYrdZ3Zl4IYLOzMvp6eL4v2s+MUHH8sSPWTZn/QW7WtQTXl0EZs/U6A/SK/" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-lB9jp5K1GzYG5iv4ErxsYqAxNJqhoJGhCvw5OrSLyT7Grn5p9/HM4S+5vGUuJMoP" crossorigin="anonymous"></script>
 </body>
 </html>

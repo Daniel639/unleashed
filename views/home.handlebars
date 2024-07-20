@@ -1,47 +1,32 @@
+{{#if loggedIn}}
 <h1>Home View</h1>
-<div id="pet-cards-container">
-    <!--here dynamically will be rendered pet profiles for each user-->
-</div>
-<head>
-    <link rel="stylesheet" href="/public/css/home.css">
-</head>
-<body>
-
-    <div id="pet-cards-container">
-        {{#each pets}}
-            {{> pet-card}}  
-        {{/each}}
-    </div>
-
-    <main class="content">
-        {{!-- User Sidebar --}}
-        <aside class="sidebar user-panel">
-            <img src="https://via.placeholder.com/100" alt="User profile" class="profile-pic">
-            <h2>{{username}}</h2>
-            <nav class="user-actions">
-                <a href="#">edit profile</a>
-                <a href="#">create post</a>
-                <a href="#">view playdates</a>
-            </nav>
-        </aside>
-
-        {{!-- Main Feed --}}
-        <section class="feed">
-            {{#each posts}}
-                <article class="post">
-                    <header class="post-header">
-                        <img src="{{this.avatar}}" alt="User avatar" class="avatar">
-                        <span class="username">@{{this.username}}</span>
-                        <button class="schedule-btn">schedule playdate</button>
-                    </header>
-                    <img src="{{this.image}}" alt="Post image" class="post-image">
-                    <p class="post-content">{{this.content}}</p>
-                </article>
+<div id="pet-profile-container">
+    {{#with pet}}
+        <img src="https://via.placeholder.com/100" alt="User profile" class="profile-pic">
+        <h2 class="pet-name">{{name}}, {{breed}}</h2>
+        <p id="age">Age: {{age}}<p>
+        <p id="gender">Gender: {{gender}}</p>
+        <p id="pet-bio">Bio: {{bio}}</p> 
+        {{/with}}
+        {{>pet-actions}}
+        
+ <section class="feed">
+            {{#each posts as |post|}}
+            <li>
+            <div class="post-card">
+                <header class="post-header">
+                    <img src="https://via.placeholder.com/50" alt="User avatar" class="avatar">
+                    <span class="username">pet name</span>
+                    <button class="schedule-btn">schedule playdate</button>
+                </header>
+                <img src="https://via.placeholder.com/400x300" alt="Post image" class="post-image">
+                <p class="post-content">{{post.content}}</p>
+                <button>request playdate</button>
+             </div>
+            </li>
             {{/each}}
         </section>
-
-        {{!-- Playdate Requests Sidebar --}}
-        <aside class="sidebar playdate-panel">
+        <!--<aside class="sidebar playdate-panel">
             <h2>playdates:</h2>
             {{#each playdateRequests}}
                 <div class="playdate-request">
@@ -52,8 +37,14 @@
                         <button class="decline-btn">decline</button>
                     </div>
                 </div>
-            {{/each}}
-        </aside>
-    </main>
-   <script src="script.js"></script> </body>
-</html>
+            </div>
+            More playdate requests would go here 
+        </aside>-->
+ 
+  {{else}}
+ {{> login-msg}}
+   {{/if}}
+
+      <script src="/js/logout.js"></script>
+     <script src="/js/logic.js"></script>
+    <script src="/js/router.js"></script>
