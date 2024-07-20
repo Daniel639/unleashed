@@ -1,23 +1,39 @@
 const router = require('express').Router();
-const User = require('../models/user');
-const Pet = require ('../models/pet');
+const User = require('../models/users');
+const Pet = require ('../models/pets');
 const bcrypt=require('bcrypt');
+const userAuth = require('../utils/auth');
 
 router.get('/', (req, res) => {
     res.render('login');
 });
-router.get('/profile', (req, res) => {
+router.get('/profile', userAuth, (req, res) => {
     res.render('profile', {
         loggedIn: req.session.loggenIn
     });
 });
+router.get('/about', async (req, res) => {
+    try { 
+        await res.render('about', {
+        loggedIn: req.session.loggenIn
+    });
+    } catch(err) {
+        console.log("error: ", err)
+    }
+    });
 router.get('/login', (req, res) => {
   res.render('login');
 });
-router.get('/home', (req, res) => {
-  res.render('home', {
-    loggedIn: req.session.loggenIn
-  });
+router.get('/home', async (req, res) => {
+    try{
+    const petsData= await Pet.findAll({ where: {user_id: req.session.user.id}});
+    console.log(petsData);
+    const pets = petsData.map((pet) => pet.get({ plain: true }));
+    console.log(pets);
+    res.render('home', {pets, loggedIn: req.session.loggenIn})
+} catch(err) {
+    console.log("error: ", err)
+}
 });
 router.get('/edit', (req, res) => {
     res.render('edit', {
@@ -29,7 +45,6 @@ router.get('/edit', (req, res) => {
     try {
       console.log("Hit login route");
       console.log(req.body);
-      const {loginUsername, loginPassword} = req.body
       const userData = await User.findOne({ where: { username: req.body.loginUn } });
       if (!userData) {
         return res.status(404).json({ message: 'Login failed. Please try again!', success: false });
@@ -40,10 +55,13 @@ router.get('/edit', (req, res) => {
       res.status(400).json({ message: 'Incorrect email or password, please try again' });
       return;
     }
+    req.session.user=userData;
+   console.log(userData);
       return req.session.save(()=>{
         req.session.loggenIn=true,
         res.redirect('/home')
-        })
+        });
+      
     } catch (err) {
       console.error('Login error:', err);
       return res.status(500).json({ message: 'An error occurred during login', success: false, error: err.message });
@@ -73,6 +91,8 @@ router.post('/submit-register-form',(req,res) => {
             // We need to determine HoW and or WHAT we RESPONSE back to the VIEW/frontend
            // res.status(301).json({ messege: "New User Created!"})
            //after user successfully registered - redirect to add pet profile page.
+           req.session.user=data.dataValues;
+           console.log ( req.session.user);
            req.session.save(()=>{
             req.session.loggenIn=true;
             res.redirect(`/add-pet`)
@@ -85,20 +105,19 @@ router.post('/submit-register-form',(req,res) => {
 
 router.get(`/add-pet`, (req, res) => {
     console.log("Hit pet-register route");
-    res.render('pet-register', {
+    console.log(req.session.user);
+    res.render('add-pet', {
        loggedIn: req.session.loggenIn
     }
     );
 });
 
-
-// New router for editing a pet 
-router.post(`/add-pet/`, (req, res) => {
+router.post(`/add-pet`, (req, res) => {
     console.log("Hit add pet route");
     const { name, type, breed, age, gender, bio } = req.body
     // Create a temp user 
     let newPet = {
-        user_id: userId,
+        user_id: req.session.user.id,
         name: name,
         type: type,
         breed: breed,

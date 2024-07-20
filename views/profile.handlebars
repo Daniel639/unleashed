@@ -1,5 +1,5 @@
 {{#if loggedIn}}
 <h1>Profile View</h1>
 {{else}}
-  <p>Please <a href="/login">Log in</a> to your account to view the page</p>
+  {{> login-msg}}
 {{/if}}
