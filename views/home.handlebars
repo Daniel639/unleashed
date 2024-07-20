@@ -2,49 +2,58 @@
 <div id="pet-cards-container">
     <!--here dynamically will be rendered pet profiles for each user-->
 </div>
+<head>
+    <link rel="stylesheet" href="/public/css/home.css">
+</head>
+<body>
 
+    <div id="pet-cards-container">
+        {{#each pets}}
+            {{> pet-card}}  
+        {{/each}}
+    </div>
 
-    <header class="header">
-        <button class="menu-icon">☰</button>
-        <h1>unleashed</h1>
-        <button class="code-icon">&lt;/&gt;</button>
-    </header>
     <main class="content">
+        {{!-- User Sidebar --}}
         <aside class="sidebar user-panel">
             <img src="https://via.placeholder.com/100" alt="User profile" class="profile-pic">
-            <h2>corgi123</h2>
+            <h2>{{username}}</h2>
             <nav class="user-actions">
                 <a href="#">edit profile</a>
                 <a href="#">create post</a>
                 <a href="#">view playdates</a>
             </nav>
         </aside>
+
+        {{!-- Main Feed --}}
         <section class="feed">
-            <article class="post">
-                <header class="post-header">
-                    <img src="https://via.placeholder.com/50" alt="User avatar" class="avatar">
-                    <span class="username">@corgi123</span>
-                    <button class="schedule-btn">schedule playdate</button>
-                </header>
-                <img src="https://via.placeholder.com/400x300" alt="Post image" class="post-image">
-                <p class="post-content">Welcome to Unleashed, a social media platform for pet lovers. 
-                Share photos and stories of your pets and connect with fellow enthusiasts. 
-                Join Unleashed to celebrate your furry friends!</p>
-            </article>
-            <!-- More posts would go here -->
+            {{#each posts}}
+                <article class="post">
+                    <header class="post-header">
+                        <img src="{{this.avatar}}" alt="User avatar" class="avatar">
+                        <span class="username">@{{this.username}}</span>
+                        <button class="schedule-btn">schedule playdate</button>
+                    </header>
+                    <img src="{{this.image}}" alt="Post image" class="post-image">
+                    <p class="post-content">{{this.content}}</p>
+                </article>
+            {{/each}}
         </section>
+
+        {{!-- Playdate Requests Sidebar --}}
         <aside class="sidebar playdate-panel">
             <h2>playdates:</h2>
-            <div class="playdate-request">
-                <img src="https://via.placeholder.com/50" alt="User avatar" class="avatar">
-                <span class="username">@user123</span>
-                <div class="action-buttons">
-                    <button class="accept-btn">accept</button>
-                    <button class="decline-btn">decline</button>
+            {{#each playdateRequests}}
+                <div class="playdate-request">
+                    <img src="{{this.avatar}}" alt="User avatar" class="avatar">
+                    <span class="username">@{{this.username}}</span>
+                    <div class="action-buttons">
+                        <button class="accept-btn">accept</button>
+                        <button class="decline-btn">decline</button>
+                    </div>
                 </div>
-            </div>
-            <!-- More playdate requests would go here -->
+            {{/each}}
         </aside>
     </main>
-    <script src="script.js"></script>
-
+   <script src="script.js"></script> </body>
+</html>

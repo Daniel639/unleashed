@@ -34,10 +34,9 @@
     </nav>
 
     <main>
-        <!-- Your content here -->
+        {{{body}}}
     </main>
-
-    <script>
+<script>
         function toggleMenu() {
             const menu = document.getElementById('offScreenMenu');
             const hamMenu = document.getElementById('hamMenu');
@@ -45,11 +44,6 @@
             hamMenu.classList.toggle('active');
         }
     </script>
-
-    <main>
-        {{{body}}}
-    </main>
-
     <script src="/js/router.js"></script>
     <script src="../../public/js/logic.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-28F5LHYrdZ3Zl4IYLOzMvp6eL4v2s+MUHH8sSPWTZn/QW7WtQTXl0EZs/U6A/SK/" crossorigin="anonymous"></script>
