@@ -3,7 +3,7 @@
 module.exports = {
   up: async (queryInterface, Sequelize) => {
     // Seed Users
-    const users = await queryInterface.bulkInsert('Users', [
+    await queryInterface.bulkInsert('Users', [
       {
         firstName: 'John',
         lastName: 'Doe',
@@ -23,9 +23,9 @@ module.exports = {
     ], { returning: true });
 
     // Seed Pets
-    const pets = await queryInterface.bulkInsert('Pets', [
+    await queryInterface.bulkInsert('Pets', [
       {
-        userId: users[0].id,
+        userId: 1,
         name: 'Buddy',
         type: 'Dog',
         breed: 'Labrador',
@@ -36,7 +36,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        userId: users[1].id,
+        userId: 2,
         name: 'Whiskers',
         type: 'Cat',
         breed: 'Siamese',
@@ -51,7 +51,7 @@ module.exports = {
     // Seed Posts
     const posts = await queryInterface.bulkInsert('Posts', [
       {
-        petId: pets[0].id,
+        petId: 1,
         title: 'Buddy\'s Park Adventure',
         content: 'Had a great time at the dog park today! Made new friends and played fetch for hours.',
         date: '2024-03-15',
@@ -60,7 +60,7 @@ module.exports = {
         updatedAt: new Date()
       },
       {
-        petId: pets[1].id,
+        petId: 2,
         title: 'Whiskers\' Lazy Sunday',
         content: 'Spent the whole day napping in my favorite sunbeam. Purrfect!',
         date: '2024-03-16',
@@ -73,15 +73,15 @@ module.exports = {
     // Seed Comments
     await queryInterface.bulkInsert('Comments', [
       {
-        postId: posts[0].id,
-        userId: users[1].id,
+        postId: 1,
+        userId: 2,
         content: 'Looks like Buddy had a blast! We should arrange a playdate.',
         createdAt: new Date(),
         updatedAt: new Date()
       },
       {
-        postId: posts[1].id,
-        userId: users[0].id,
+        postId: 2,
+        userId: 1,
         content: 'Whiskers knows how to enjoy life! My Buddy could learn a thing or two about relaxation.',
         createdAt: new Date(),
         updatedAt: new Date()
@@ -89,7 +89,7 @@ module.exports = {
     ]);
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface, _Sequelize) => {
     // Remove all seeded data
     await queryInterface.bulkDelete('Comments', null, {});
     await queryInterface.bulkDelete('Posts', null, {});
