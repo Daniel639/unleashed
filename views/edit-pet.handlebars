@@ -2,7 +2,7 @@
 <div class="row mt-4">
   <div class="col-md-6">
     <h3>Edit pet</h3>
-    <form class="add-pet-form" >
+    <form class="add-pet-form" id="edit-form" data-user-id="{{pet.user_id}}" data-pet-id="{{pet.id}}" >
       <div class="form-group">
         <label for="pet-name">Pet Name:</label>
         <input class="form-input" type="text" id="pet-name" name="name" value="{{pet.name}}"/>
@@ -28,10 +28,10 @@
         <textarea class="form-input" id="pet-description" name="bio" rows="5"  placeholder="{{pet.bio}}" value="{{pet.bio}}"required></textarea>
       </div>
       <div class="form-group">
-        <button type="submit" class="btn btn-primary">Save Changes</button>
+       <button type="submit" class="btn btn-primary" id="save-changes">Save Changes</button>
         
       </div>
     </form>
   </div>
 </div>
-<script src="../public/js/router.js"></script>
+  <script src="/js/edit-pet.js"></script>

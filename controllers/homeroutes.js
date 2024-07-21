@@ -36,7 +36,7 @@ router.post('/register/:username', async (req,res) => {
            let id=req.session.user.id;
            //console.log ( req.session.user);
            req.session.save(()=>{
-            req.session.loggenIn=true;
+            req.session.loggedIn=true;
             res.redirect(`/add-pet/${id}`)
         })       
         } catch(err) {
@@ -177,7 +177,7 @@ router.get('/create-post/:id', async (req, res) => {
                
                 await res.render('edit-pet', { 
                 pet,
-               loggedIn: req.session.loggenIn,
+               loggedIn: req.session.loggedIn,
                 });
             } catch (err) {
                 console.log("error: ", err)
@@ -189,23 +189,25 @@ router.get('/create-post/:id', async (req, res) => {
                 let id = req.params.id;
                  await Pet.update(
                 {
-                    name: name,
-                    type: type,
-                    breed: breed,
-                    age: age,
-                    gender: gender,
-                    bio: bio
+                    name: req.body.name,
+                    type: req.body.type,
+                    breed:req.body. breed,
+                    age: req.body.age,
+                    gender: req.body.gender,
+                    bio: req.body.bio
                 },
                 { where: {id: id }});
-                const updatedPet=Pet.findByPk(id)
-                xonsole.log("Updated pet: ", updatedPet);
+                const petData=await Pet.findByPk(id);
+                console.log("Updated pet: ", petData);
+                const petString = JSON.stringify(petData);
+                const pet = JSON.parse(petString);
                 const postsData= await Post.findAll({where: {pet_id:id }});
                 const posts = postsData.map((post) => post.get({ plain: true }));
-                const userId=req.session.user.id;
-                res.render(`home/${userId}/${id}`, { posts, 
+                let userId=pet.user_id;
+                res.render('home', { posts, 
                     pet,
-                    loggedIn: req.session.loggenIn
-                });
+                    loggedIn: req.session.loggedIn
+                 });
             } catch (err) {
                     console.log("error: ", err)
                 };
@@ -216,7 +218,7 @@ router.get('/feed/:id', async (req, res) => {
             const posts = allPostsData.map((post) => post.get({ plain: true }));
             res.render('feed', {
             posts,
-            loggedIn: req.session.loggenIn
+            loggedIn: req.session.loggedIn
             });
         } catch(err) {
         console.log("error: ", err)
@@ -226,7 +228,7 @@ router.get('/feed/:id', async (req, res) => {
 router.get('/schedule-playdate', async (req, res) => {
     try { 
         await res.render('playdate-form', {
-        loggedIn: req.session.loggenIn
+        loggedIn: req.session.loggedIn
         });
     } catch(err) {
         console.log("error: ", err)
