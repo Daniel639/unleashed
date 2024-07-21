@@ -1,0 +1,37 @@
+
+<div class="row mt-4">
+  <div class="col-md-6">
+    <h3>Edit pet</h3>
+    <form class="add-pet-form" action="/edit-pet/{{pet.id}}" method="PUT">
+      <div class="form-group">
+        <label for="pet-name">Pet Name:</label>
+        <input class="form-input" type="text" id="pet-name" name="name" value="{{pet.name}}"/>
+      </div>
+      <div class="form-group">
+        <label for="pet-species">Species:</label>
+        <input class="form-input" type="text" id="pet-species" name="type" value="{{pet.type}}" required/>
+      </div>
+      <div class="form-group">
+        <label for="pet-breed">Breed:</label>
+        <input class="form-input" type="text" id="pet-breed" name="breed" value="{{pet.breed}}"required/>
+      </div>
+      <div class="form-group">
+        <label for="pet-age">Age:</label>
+        <input class="form-input" type="number" id="pet-age" name="age" value="{{pet.age}}"required/>
+      </div>
+      <div class="form-group">
+        <label for="pet-gender">Gender:</label>
+        <input class="form-input" type="text" id="pet-gender" name="gender" value="{{pet.gender}}"required/>
+      </div>
+      <div class="form-group">
+        <label for="pet-description" required>Description:</label>
+        <textarea class="form-input" id="pet-description" name="bio" rows="5" value="{{pet.bio}}"required></textarea>
+      </div>
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        
+      </div>
+    </form>
+  </div>
+</div>
+<script src="../public/js/router.js"></script>
