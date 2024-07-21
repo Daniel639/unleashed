@@ -1,7 +1,8 @@
 const User = require('./users');
 const Pet = require('./pets');
 const Post = require('./posts');
-const Comment = require('./commentss');
+const Comment = require('./comments');
+const Playdate = require('./playdates');
 
 User.hasMany(Pet, {
     foreignKey: 'user_id',
@@ -38,4 +39,13 @@ Comment.belongsTo(Pet, {
     foreignKey: 'pet_id'
 });
 
-module.exports = {User, Pet, Post, Comment};
+Pet.belongsToMany(Playdate, { 
+    through: PetPlaydate, 
+    foreignKey: 'pet_id' 
+});
+Playdate.belongsToMany(Pet, { 
+    through: Playdate, 
+    foreignKey: 'playdate_id'
+ });
+ 
+module.exports = {User, Pet, Post, Comment, Playdate};

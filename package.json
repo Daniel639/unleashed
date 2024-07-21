@@ -4,6 +4,7 @@
   "description": "Welcome to UnLeashed – the ultimate social media platform for pet lovers! Connect with other pet enthusiasts, share photos and stories of your furry friends, and organize play dates.",
   "main": "server.js",
   "scripts": {
+    "seed": "node demo-user.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
