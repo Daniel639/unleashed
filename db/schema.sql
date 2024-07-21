@@ -1,6 +1,8 @@
 DROP DATABASE IF EXISTS unleashed;
 CREATE DATABASE unleashed;
 
+CREATE DATABASE database_development;
+
 \c unleashed_db;
 
 CREATE TABLE users (
