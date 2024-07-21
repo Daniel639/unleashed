@@ -13,3 +13,6 @@ CREATE TABLE users (
   password VARCHAR (30) NOT NULL
 );
 
+ALTER TABLE "pets"
+ADD PRIMARY KEY ("id");
+
