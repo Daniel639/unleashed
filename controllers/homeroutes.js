@@ -72,7 +72,7 @@ router.post('/login/:loginUn', async (req, res) => {
    console.log(userData);
    req.session.user=userData;
       return req.session.save(()=>{
-        req.session.loggenIn=true,
+        req.session.loggedIn=true,
         res.redirect(`/choose-pet/${id}`)
         });
       
@@ -110,7 +110,7 @@ router.post('/login/:loginUn', async (req, res) => {
         // Render the page with pet details and posts
         res.render('home', { posts, 
             pet,
-            loggedIn: req.session.loggenIn
+            loggedIn: req.session.loggedIn
          }); // Adjust 'petDetails' to your Handlebars template
       } catch (error) {
         console.error('Error fetching pet and posts:', error);
@@ -221,6 +221,16 @@ router.get('/feed/:id', async (req, res) => {
         } catch(err) {
         console.log("error: ", err)
                 }
+});
+
+router.get('/schedule-playdate', async (req, res) => {
+    try { 
+        await res.render('playdate-form', {
+        loggedIn: req.session.loggenIn
+        });
+    } catch(err) {
+        console.log("error: ", err)
+    }
 });
             
 router.get('/about', async (req, res) => {
