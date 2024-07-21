@@ -1,0 +1,26 @@
+ <div class="feed">
+            {{#each posts as |post|}}
+            <div class="post-container">
+                <div class="post-card">
+                    <header class="post-header">
+                        <img src="https://via.placeholder.com/50" alt="User avatar" class="avatar">
+                        <span class="username">{{pet.name}}</span>
+                        <button class="schedule-btn">schedule playdate</button>
+                    </header>
+                    <div class="post">
+                        <img src="https://via.placeholder.com/400x300" alt="Post image" class="post-image">
+                        <p class="post-content">{{post.content}}</p>
+                    </div>
+                </div>
+                <div class="comments">Comments
+                    {{#each comments as |comment|}}
+                    <div>
+                        <h4>{{pet.name}}:</h4>
+                        <p>{{comment.content}}</p>
+                    </div>
+                    {{/each}}
+                    <a href="/add-comment/{{post.id}}">Add Comment</a>
+                </div>
+             </div>
+            {{/each}}
+    </div>

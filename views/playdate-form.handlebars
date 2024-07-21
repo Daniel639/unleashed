@@ -1,0 +1,13 @@
+<h1>Schedule a Playdate with {{pet.breed}} {{pet.name}}</h1>
+    <form action="/schedule_playdate" method="POST">
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required><br><br>
+        
+        <label for="time">Time:</label>
+        <input type="time" id="time" name="time" required><br><br>
+        
+        <label for="location">Location:</label>
+        <input type="text" id="location" name="location" required><br><br>
+        
+        <button type="submit">Schedule Playdate</button>
+    </form>

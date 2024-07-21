@@ -1,50 +1,36 @@
 {{#if loggedIn}}
-<h1>Home View</h1>
-<div id="pet-profile-container">
-    {{#with pet}}
+    <header>
+        <a href="/feed/{{pet.id}}">Feed</a>
+    </header>
+<div id="homepage-container">
+
+    <div id="pet-profile-card">
+     {{#with pet}}
         <img src="https://via.placeholder.com/100" alt="User profile" class="profile-pic">
-        <h2 class="pet-name">{{name}}, {{breed}}</h2>
-        <p id="age">Age: {{age}}<p>
-        <p id="gender">Gender: {{gender}}</p>
-        <p id="pet-bio">Bio: {{bio}}</p> 
-        {{/with}}
+        <h2 class="pet-name">{{name}}</h2>
+        <ul id="pet-info">
+            <li id="pet-breed">Breed: {{breed}}</li>   
+            <li id="pet-age">Age: {{age}}</li> 
+            <li id="pet-gender">Gender: {{gender}}</li> 
+            <li id="pet-bio">Bio: {{bio}}</li> 
+        </ul>
         {{>pet-actions}}
+    {{/with}}
+    <a href="javascript:history.back()" class="back-button">Back to My Pets</a>
+    </div>
+    <div id="pet-posts-container">
         
- <section class="feed">
-            {{#each posts as |post|}}
-            <li>
-            <div class="post-card">
-                <header class="post-header">
-                    <img src="https://via.placeholder.com/50" alt="User avatar" class="avatar">
-                    <span class="username">pet name</span>
-                    <button class="schedule-btn">schedule playdate</button>
-                </header>
-                <img src="https://via.placeholder.com/400x300" alt="Post image" class="post-image">
-                <p class="post-content">{{post.content}}</p>
-                <button>request playdate</button>
-             </div>
-            </li>
-            {{/each}}
-        </section>
-        <!--<aside class="sidebar playdate-panel">
-            <h2>playdates:</h2>
-            {{#each playdateRequests}}
-                <div class="playdate-request">
-                    <img src="{{this.avatar}}" alt="User avatar" class="avatar">
-                    <span class="username">@{{this.username}}</span>
-                    <div class="action-buttons">
-                        <button class="accept-btn">accept</button>
-                        <button class="decline-btn">decline</button>
-                    </div>
-                </div>
-            </div>
-            More playdate requests would go here 
-        </aside>-->
- 
+
+    </div>
+   
+    <div id="playdate-requests-container"> Playdate requests will be displayed here
+
+    </div>
+</div>
   {{else}}
- {{> login-msg}}
+  {{> login-msg}}
    {{/if}}
 
-      <script src="/js/logout.js"></script>
+    <script src="/js/logout.js"></script>
      <script src="/js/logic.js"></script>
     <script src="/js/router.js"></script>

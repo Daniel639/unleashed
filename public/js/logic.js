@@ -28,10 +28,7 @@ const currentUrl = window.location.href;
     });
     });
 
-
-    
         const btns = document.querySelectorAll('.view-profile-btn');
-
         btns.forEach(btn => {
             btn.addEventListener('click', function() {
                 const userId = btn.getAttribute('data-user-id');
@@ -39,5 +36,5 @@ const currentUrl = window.location.href;
                 window.location.href = `/home/${userId}/${petId}`; // Redirect to pet details page
             });
         });
-      
 
+        
