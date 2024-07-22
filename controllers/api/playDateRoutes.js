@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const Pet = require('../models/pet');
-const PlayDate = require('../models/playdates');
+const PlayDate = require('../../models/playdates');
 
 /*Route to render the schedule play date form*/
 router.get('/schedule-play-date', async (req, res) => {
