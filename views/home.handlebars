@@ -1,7 +1,4 @@
 {{#if loggedIn}}
-    <header>
-        <a href="/feed/{{pet.id}}">Feed</a>
-    </header>
 <div id="homepage-container">
 
     <div id="pet-profile-card">
@@ -16,14 +13,17 @@
         </ul>
         {{>pet-actions}}
     {{/with}}
-    <a href="javascript:history.back()" class="back-button">Back to My Pets</a>
+    <a href="/choose-pet/{{pet.user_id}}" class="back-button">Back to My Pets</a></br>
+    <a href="/feed/{{pet.id}}" id="feed" class="pet-action-btn">FEED</a>
     </div>
-    <div id="pet-posts-container">
+    <div id="pet-posts-container"> MY POSTS
+           {{>coming-soon}}
         
 
     </div>
    
-    <div id="playdate-requests-container"> Playdate requests will be displayed here
+    <div id="playdate-requests-container"> MY PLAYDATE REQUESTS 
+       {{>coming-soon}}
 
     </div>
 </div>

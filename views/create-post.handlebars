@@ -1,23 +1,8 @@
 <div class="row mt-4">
   <div class="col-md-6">
-    <h3>Add a new pet</h3>
-    <form class="add-pet-form" action="/create-post" method="POST">
-      <div class="form-group">
-        <label for="pet-age">Write your po:</label>
-        <input class="form-input" type="number" id="pet-age" name="age" />
-      </div>
-      <div class="form-group">
-        <label for="pet-gender">Gender:</label>
-        <input class="form-input" type="text" id="pet-gender" name="gender"/>
-      </div>
-      <div class="form-group">
-        <label for="pet-description">Description:</label>
-        <textarea class="form-input" id="pet-description" name="bio" rows="5" required></textarea>
-      </div>
-      <div class="form-group">
-        <button type="submit" class="btn btn-primary">Register pet</button>
-        
-      </div>
-    </form>
+    <h3>Add a new post</h3>
+    {{> coming-soon}}
+     <a href="javascript:history.back()" class="back-button">Back to Feed</a>
   </div>
+ 
 </div>
