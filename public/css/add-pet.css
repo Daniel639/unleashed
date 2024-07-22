@@ -1,77 +1,65 @@
-/* Global Styles */
+/* add-pet.css */
+
+/* Basic page styling */
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f6;
     color: #333;
     margin: 0;
     padding: 0;
-}
-
-.container {
+  }
+  
+  .container {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 20px auto;
     padding: 20px;
-}
-
-h3 {
-    color: #4e5d6c;
-    font-size: 1.75rem;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+  }
+  
+  h3 {
+    color: #5e7e4d;
+    text-align: center;
     margin-bottom: 20px;
-}
-
-/* Form Styling */
-.add-pet-form {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-}
-
-/* Grouping Form Elements */
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group label {
+  }
+  
+  /* Form styling */
+  .add-pet-form .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .add-pet-form label {
     display: block;
-    font-size: 1rem;
-    margin-bottom: 8px;
-    color: #555;
-}
-
-.form-input {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .add-pet-form .form-input {
     width: 100%;
-    padding: 12px;
-    font-size: 1rem;
-    border: 1px solid #ddd;
+    padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 5px;
     box-sizing: border-box;
-    transition: border-color 0.3s ease;
-}
-
-.form-input:focus {
-    border-color: #4e5d6c;
+  }
+  
+  .add-pet-form .form-input:focus {
+    border-color: #5e7e4d;
     outline: none;
-}
-
-textarea.form-input {
-    resize: vertical;
-}
-
-.btn {
-    display: inline-block;
-    padding: 12px 24px;
-    font-size: 1rem;
-    color: #fff;
-    background-color: #4e5d6c;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+  .add-pet-form .btn-primary {
+    width: 100%;
+    padding: 10px;
+    background-color: #5e7e4d;
     border: none;
     border-radius: 5px;
+    color: #fff;
+    font-size: 16px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.btn:hover {
-    background-color: #3c4a56;
-    transform: scale(1.05);
-}
+  }
+  
+  .add-pet-form .btn-primary:hover {
+    background-color: #5e7e4d;
+  }
+  
