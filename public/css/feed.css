@@ -1,0 +1,118 @@
+/* Container for the entire feed */
+.feed {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+    background-color: var(--secondary-color);
+    border-radius: 10px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Container for each post */
+.post-container {
+    background-color: var(--primary-color);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Header section of each post */
+.post-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background-color: var(--accent-color);
+}
+
+.post-header .avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.post-header .username {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.post-header .schedule-btn {
+    margin-left: auto;
+    background-color: var(--text-color);
+    color: var(--primary-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.post-header .schedule-btn:hover {
+    background-color: #e0e0e0;
+}
+
+/* Main content of each post */
+.post {
+    padding: 1rem;
+}
+
+.post .post-image {
+    width: 100%;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+}
+
+.post .post-content {
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+/* Comments section */
+.comments {
+    background-color: var(--secondary-color);
+    padding: 1rem;
+    border-top: 1px solid #ddd;
+}
+
+.comments h4 {
+    margin: 0;
+    font-size: 1.1rem;
+    color: var(--text-color);
+}
+
+.comments p {
+    margin: 0.5rem 0;
+    color: var(--text-color);
+}
+
+.comments a {
+    display: block;
+    margin-top: 0.5rem;
+    color: var(--accent-color);
+    text-decoration: underline;
+}
+
+.comments a:hover {
+    color: var(--primary-color);
+}
+
+/* Media query for responsive design */
+@media (max-width: 768px) {
+    .feed {
+        padding: 0.5rem;
+    }
+
+    .post-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .post-header .schedule-btn {
+        margin-left: 0;
+        margin-top: 0.5rem;
+    }
+}

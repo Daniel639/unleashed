@@ -1,4 +1,7 @@
 {{#if loggedIn}}
+    <header>
+        <a href="/feed/{{pet.id}}" class="feed-button">Feed</a>
+    </header>
 <div id="homepage-container">
 
     <div id="pet-profile-card">
@@ -14,7 +17,6 @@
         {{>pet-actions}}
     {{/with}}
     <a href="/choose-pet/{{pet.user_id}}" class="back-button">Back to My Pets</a></br>
-    <a href="/feed/{{pet.id}}" id="feed" class="pet-action-btn">FEED</a>
     </div>
     <div id="pet-posts-container"> MY POSTS
            {{>coming-soon}}

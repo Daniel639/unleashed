@@ -60,4 +60,4 @@ For any questions, please contact me or the group:
 - Daniel: [Daniel's GitHub](https://github.com/Daniel639)
 - Javi: [Javier's GitHub](https://github.com/javimari)
 
-For additional questions, please email me at the address provided above.
+For additional questions, please reach out to the group.
