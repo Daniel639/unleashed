@@ -211,3 +211,8 @@ nav {
     top: 60px; /* Adjust to be just below the header */
   }
 }
+h1{
+  margin-right: 600px;
+  color: white;
+  font-weight: heavy;
+}
