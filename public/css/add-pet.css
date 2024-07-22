@@ -19,27 +19,30 @@ h3 {
     margin-bottom: 20px;
 }
 
+/* Form Styling */
 .add-pet-form {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
 }
 
+/* Grouping Form Elements */
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .form-group label {
     display: block;
     font-size: 1rem;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     color: #555;
 }
 
 .form-input {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     font-size: 1rem;
     border: 1px solid #ddd;
     border-radius: 5px;
@@ -58,7 +61,7 @@ textarea.form-input {
 
 .btn {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 12px 24px;
     font-size: 1rem;
     color: #fff;
     background-color: #4e5d6c;
