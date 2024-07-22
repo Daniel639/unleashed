@@ -7,7 +7,7 @@
     "seed": "node demo-user.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "seed-all": "npx sequelize-cli db:seed:all"  // Combined script names
+    "seed-all": "npx sequelize-cli db:seed:all"
   },
   "keywords": [],
   "author": "",
@@ -21,10 +21,10 @@
     "express": "^4.17.1",
     "express-handlebars": "^5.2.0",
     "express-session": "^1.17.1",
-    "multer": "^1.4.5-lts.1",           // Included dependencies
+    "multer": "^1.4.5-lts.1",
     "multer-storage-cloudinary": "^4.0.0",
     "mysql2": "^3.10.3",
-    "pg": "^8.11.3",                     
+    "pg": "^8.11.3",
     "sequelize": "^6.3.5"
   },
   "devDependencies": {
