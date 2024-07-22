@@ -1,136 +1,45 @@
-:root {
-    --primary-color: #5b8c5a;
-    --secondary-color: #f0ebe0;
-    --text-color: #ffffff;
-    --accent-color: #4a7149;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: var(--secondary-color);
-    color: var(--text-color);
-}
-
-.header {
-    background-color: var(--primary-color);
-    padding: 1rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.menu-icon, .code-icon {
-    background: none;
-    border: none;
-    color: var(--text-color);
-    font-size: 1.5rem;
-    cursor: pointer;
-}
-
-.content {
-    display: flex;
-    padding: 1rem;
-    gap: 1rem;
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.sidebar {
-    background-color: var(--primary-color);
-    border-radius: 10px;
-    padding: 1rem;
-    flex: 1;
-}
-
-.feed {
-    flex: 2;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.post {
-    background-color: var(--primary-color);
-    border-radius: 10px;
-    padding: 1rem;
-}
-
-.post-header {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-.profile-pic, .avatar {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.profile-pic {
-    width: 100px;
-    height: 100px;
-}
-
-.post-image {
-    width: 100%;
+/* Feed button styling */
+/* Feed button styling */
+header a.feed-button {
+    color: #ffffff; /* Set text color to white */
+    background-color: #5e7e4d; /* Updated background color */
+    padding: 10px 20px;
+    text-decoration: none;
     border-radius: 5px;
-    margin-bottom: 1rem;
-}
-
-.user-actions a {
-    color: var(--text-color);
-    text-decoration: underline;
-    display: block;
-    margin-top: 0.5rem;
-}
-
-.schedule-btn, .accept-btn, .decline-btn {
-    background-color: var(--text-color);
-    color: var(--primary-color);
-    border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s, box-shadow 0.3s;
+    font-size: 16px;
     font-weight: bold;
+    display: inline-block;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin-left: 20px;
 }
 
-.accept-btn {
-    background-color: #4CAF50;
-    color: var(--text-color);
+header a.feed-button:hover {
+    background-color: #506b41; /* Updated hover color */
+    transform: scale(1.05);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
 }
 
-.decline-btn {
-    background-color: #f44336;
-    color: var(--text-color);
+/* Optional: Add focus styles for accessibility */
+header a.feed-button:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
 }
 
-.playdate-request {
-    background-color: var(--accent-color);
+
+header a.feed-button:hover {
+    background-color: #506b41; /* Updated hover color */
+    transform: scale(1.05);
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Optional: Add focus styles for accessibility */
+header a.feed-button:focus {
+    outline: 2px solid var(--accent-color);
+    outline-offset: 2px;
+}
+
+img {
     border-radius: 5px;
-    padding: 0.5rem;
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.action-buttons {
-    display: flex;
-    gap: 0.5rem;
-    margin-top: 0.5rem;
-}
-
-@media (max-width: 768px) {
-    .content {
-        flex-direction: column;
-    }
-    
-    .sidebar, .feed {
-        width: 100%;
-    }
 }
