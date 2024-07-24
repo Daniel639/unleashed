@@ -1,11 +1,49 @@
-const userAuth = (req, res, next) => {
-    // If the user isn't logged in, redirect them to the login route
-    if (!req.session.logged_in) {
-      res.redirect('/');
+// auth.js
+
+// Client-side authentication helper
+(function(root, factory) {
+    if (typeof define === 'function' && define.amd) {
+        define([], factory);
+    } else if (typeof module === 'object' && module.exports) {
+        module.exports = factory();
     } else {
-      next();
+        root.Auth = factory();
     }
-  };
-  
-  module.exports = userAuth;
-  
+}(typeof self !== 'undefined' ? self : this, function() {
+    return {
+        isLoggedIn: function() {
+            return sessionStorage.getItem('isLoggedIn') === 'true';
+        },
+        
+        login: function(userId) {
+            sessionStorage.setItem('isLoggedIn', 'true');
+            sessionStorage.setItem('userId', userId);
+        },
+        
+        logout: function() {
+            sessionStorage.removeItem('isLoggedIn');
+            sessionStorage.removeItem('userId');
+        },
+        
+        getUserId: function() {
+            return sessionStorage.getItem('userId');
+        }
+    };
+}));
+
+// Server-side authentication middleware
+const userAuth = (req, res, next) => {
+    if (!req.session.loggedIn) {
+        res.status(401).json({ message: 'Unauthorized. Please log in.' });
+    } else {
+        next();
+    }
+};
+
+// Export both client-side and server-side auth
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        Auth: module.exports, // Client-side Auth object
+        userAuth: userAuth // Server-side middleware
+    };
+}
