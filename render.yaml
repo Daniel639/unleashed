@@ -1,0 +1,22 @@
+services:
+  - type: web
+    name: unleashed
+    env: node
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: CLOUD_NAME
+        value: dwvbaz9ap
+      - key: API_KEY
+        value: 376353583468474
+      - key: API_SECRET
+        sync: false
+    
+databases:
+  - name: unleashed_db
+    databaseName: unleashed
+    user: unleashed_user

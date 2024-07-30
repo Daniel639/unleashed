@@ -4,9 +4,12 @@
   "description": "Welcome to UnLeashed – the ultimate social media platform for pet lovers! Connect with other pet enthusiasts, share photos and stories of your furry friends, and organize play dates.",
   "main": "server.js",
   "scripts": {
-    "seed": "node demo-user.js",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
+    "build": "npm run db:migrate",
+    "db:migrate": "npx sequelize-cli db:migrate",
+    "seed": "node seeders/demo-user.js",
+    "seed-all": "npx sequelize-cli db:seed:all",
+    "test": "echo \"Error: no test specified\" && exit 1"
     "seed-all": "npx sequelize-cli db:seed:all"
   },
   "keywords": [],
@@ -29,5 +32,8 @@
   },
   "devDependencies": {
     "sequelize-cli": "^6.2.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
   }
 }

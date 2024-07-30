@@ -251,10 +251,12 @@ router.post('/logout', async (req, res) => {
             res.status(202).end();
             })
         } else {
-            res.status(404).end();
-        };
-    } catch(err) {
-        console.log("error: ", err)
+            res.redirect('/login'); // Redirect to login if not logged in
+        }
+    } catch (err) {
+        console.error("Error in /choose-pet route:", err);
+        res.status(500).json({ message: "Error fetching pets.", success: false, error: err.message });
     }
 });
+
 module.exports = router;

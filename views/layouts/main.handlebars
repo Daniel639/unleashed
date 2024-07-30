@@ -17,26 +17,25 @@
     <div class="off-screen-menu" id="offScreenMenu">
         <ul class="nav-links">
             <li class="nav-item">
-                <a class="nav-link" href="/home">Home</a>
+                <a class="nav-link" href="/home" data-link>Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/about">About</a>
+                <a class="nav-link" href="/about" data-link>About</a>
             </li>
-               <li class="nav-item">
-                <a class="nav-link" href="/user-profile">User Profile</a>
+            <li class="nav-item">
+                <a class="nav-link" href="/user-profile" data-link>User Profile</a>
             </li>
             {{#if loggedIn}}
             <li class="nav-item">
                 <button id="logout-btn">Logout</button>
             </li>
             {{else}}
-             <li class="nav-item">
-                <a class="nav-link" href="/">Login</a>
+            <li class="nav-item">
+                <a class="nav-link" href="/" data-link>Login</a>
             </li>
             {{/if}}
         </ul>
     </div>
-
     <nav>
         <h1>UNLEASHED</h1>
         <div class="ham-menu" id="hamMenu" onclick="toggleMenu()">
@@ -45,7 +44,7 @@
             <span></span>
         </div>
     </nav>
-     <main>
+    <div id="root">
         {{{body}}}
     </main>
     
