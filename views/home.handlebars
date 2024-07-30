@@ -1,6 +1,6 @@
 {{#if loggedIn}}
     <header>
-        <a href="/feed/{{pet.id}}">Feed</a>
+        <a href="/feed/{{pet.id}}" class="feed-button">Feed</a>
     </header>
 <div id="homepage-container">
 
@@ -30,7 +30,5 @@
   {{else}}
   {{> login-msg}}
    {{/if}}
-
+   
     <script src="/js/logout.js"></script>
-     <script src="/js/logic.js"></script>
-    <script src="/js/router.js"></script>

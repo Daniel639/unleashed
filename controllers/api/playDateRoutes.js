@@ -1,7 +1,8 @@
 const router = require('express').Router();
-const Pet = require('../models');
-const PlayDate = require('../models/playdates');
+const Pet = require('../models/pet');
+const PlayDate = require('../../models/playdates');
 
+/*Route to render the schedule play date form*/
 router.get('/schedule-play-date', async (req, res) => {
     try {
         const pets = await Pet.findAll();
@@ -12,6 +13,7 @@ router.get('/schedule-play-date', async (req, res) => {
     }
 });
 
+/* Route to handle play date scheduling form submission*/
 router.post('/schedule-play-date', async (req, res) => {
     const { pet1Id, pet2Id, date, location } = req.body;
 
@@ -31,3 +33,5 @@ router.post('/schedule-play-date', async (req, res) => {
 });
 
 module.exports = router;
+  4 changes: 2 additions & 2 deletions4  
+models/pet.
