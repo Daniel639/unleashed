@@ -10,7 +10,6 @@
     "seed": "node seeders/demo-user.js",
     "seed-all": "npx sequelize-cli db:seed:all",
     "test": "echo \"Error: no test specified\" && exit 1"
-    "seed-all": "npx sequelize-cli db:seed:all"
   },
   "keywords": [],
   "author": "",
