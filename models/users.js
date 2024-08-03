@@ -1,76 +1,59 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
 const bcrypt = require('bcrypt');
-// Create a new Sequelize model for users
+const sequelize = require('../config/connection');
+
 class User extends Model {
   checkPassword(loginPw) {
-    return bcrypt.compare(loginPw, this.password);
+    return bcrypt.compareSync(loginPw, this.password);
   }
 }
 
 User.init(
-  // Define fields/columns on model
-  // An `id` is automatically created by Sequelize, though best practice would be to define the primary key ourselves
   {
     id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    first_name: {
-      type: DataTypes.STRING,
+      type: DataTypes.INTEGER,
       allowNull: false,
-    },
-    last_name: {
-      type: DataTypes.STRING,
-      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
     },
     username: {
-        type: DataTypes.STRING,
-        // prevents null values
-        allowNull: false,
-        unique: true,
-        // will only allow alphanumeric characters
-        validate: {
-          isAlphanumeric: true,
-        }
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: {
+        isEmail: true,
+      },
     },
     password: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        // must be longer than 8 characters
-        validate: {
-          len: [8,16],
-        },
-    }
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        len: [8],
+      },
+    },
   },
   {
     hooks: {
       beforeCreate: async (newUserData) => {
-        newUserData.email = await newUserData.username.toLowerCase();
         newUserData.password = await bcrypt.hash(newUserData.password, 10);
         return newUserData;
       },
-      beforeUpdate: async (newUserData) => {
-        if (updatedUserData._changed.has("username")) {
-        newUserData.email = await newUserData.username.toLowerCase();
-        if (updatedUserData._changed.has("password")) {
-          updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
-        return newUserData;
-      }
-    }
-    }
-  },
-   // Link to database connection
+      beforeUpdate: async (updatedUserData) => {
+        updatedUserData.password = await bcrypt.hash(updatedUserData.password, 10);
+        return updatedUserData;
+      },
+    },
     sequelize,
-    // Set to false to remove `created_at` and `updated_at` fields
     timestamps: false,
     freezeTableName: true,
-    //When true , this option will set the field option on all attributes to the snake_case version of its name
     underscored: true,
-    modelName: 'users'
-   }
+    modelName: 'user',
+  }
 );
 
 module.exports = User;

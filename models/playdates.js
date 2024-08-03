@@ -1,44 +1,39 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Playdates extends Model {}
+class Playdate extends Model {}
 
-Playdates.init(
-  // Define fields/columns on model
-  // An `id` is automatically created by Sequelize, though best practice would be to define the primary key ourselves
+Playdate.init(
   {
     id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        primaryKey: true,
-        autoIncrement: true,
-    },
-    status: {
-        type: DataTypes.STRING,
-        allowNull: false
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
     },
     date: {
-    type: DataTypes.DATE,
-    allowNull: false,
-    },
-    time: {
-        type: DataTypes.time,
-        allowNull: false,
+      type: DataTypes.DATE,
+      allowNull: false,
     },
     location: {
-        type: DataTypes.STRING,
-        allowNull: false
-    }
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    description: {
+      type: DataTypes.TEXT,
+    },
+    status: {
+      type: DataTypes.ENUM('pending', 'accepted', 'rejected'),
+      defaultValue: 'pending',
+    },
   },
   {
-    // Link to database connection
     sequelize,
-    // Set to false to remove `created_at` and `updated_at` fields
     timestamps: false,
-    underscored: true,
     freezeTableName: true,
-    modelName: 'playdates'
+    underscored: true,
+    modelName: 'playdate',
   }
 );
 
-module.exports = Playdates;
+module.exports = Playdate;

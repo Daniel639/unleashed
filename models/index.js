@@ -1,51 +1,100 @@
+const { Sequelize } = require('sequelize');
+const sequelize = require('../config/connection');
+
 const User = require('./users');
 const Pet = require('./pets');
+const Playdate = require('./playdates');
 const Post = require('./posts');
 const Comment = require('./comments');
-const Playdate = require('./playdates');
+const PetPlaydate = require('./petPlaydate');
 
+// Define associations
 User.hasMany(Pet, {
-    foreignKey: 'user_id',
-    onDelete: 'CASCADE'
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE'
 });
 
 Pet.belongsTo(User, {
-    foreignKey: 'user_id'
+  foreignKey: 'user_id'
 });
 
-Pet.hasMany(Post, {
-    foreignKey: 'pet_id',
-    onDelete: 'CASCADE'
+User.hasMany(Post, {
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE'
 });
 
-Post.belongsTo(Pet, {
-    foreignKey: 'pet_id'
+Post.belongsTo(User, {
+  foreignKey: 'user_id'
 });
 
 Post.hasMany(Comment, {
-    foreignKey: 'post_id',
-    onDelete: 'CASCADE'
+  foreignKey: 'post_id',
+  onDelete: 'CASCADE'
 });
 
 Comment.belongsTo(Post, {
-    foreignKey: 'post_id'
+  foreignKey: 'post_id'
 });
 
-Pet.hasMany(Comment, {
-    foreignKey: 'pet_id',
-    onDelete: 'CASCADE'
-});
-Comment.belongsTo(Pet, {
-    foreignKey: 'pet_id'
+User.hasMany(Comment, {
+  foreignKey: 'user_id',
+  onDelete: 'CASCADE'
 });
 
-Pet.belongsToMany(Playdate, { 
-    through: PetPlaydate, 
-    foreignKey: 'pet_id' 
+Comment.belongsTo(User, {
+  foreignKey: 'user_id'
 });
-Playdate.belongsToMany(Pet, { 
-    through: Playdate, 
-    foreignKey: 'playdate_id'
- });
- 
-module.exports = {User, Pet, Post, Comment, Playdate};
+
+Pet.belongsToMany(Playdate, {
+  through: PetPlaydate,
+  foreignKey: 'pet_id',
+  otherKey: 'playdate_id',
+  as: 'petPlaydates'
+});
+
+Playdate.belongsToMany(Pet, {
+  through: PetPlaydate,
+  foreignKey: 'playdate_id',
+  otherKey: 'pet_id',
+  as: 'playdatePets'
+});
+
+// Function to sync all models
+const syncModels = async () => {
+  try {
+    if (process.env.NODE_ENV === 'production') {
+      console.log('Running in production mode. Skipping model sync. Ensure migrations are run.');
+      return;
+    }
+
+    // Sync all models
+    await sequelize.sync({ alter: true });
+    console.log('All models were synchronized successfully.');
+  } catch (error) {
+    console.error('An error occurred while synchronizing the models:', error);
+    throw error; // Rethrow the error to be handled by the calling function
+  }
+};
+
+// Function to test database connection
+const testDatabaseConnection = async () => {
+  try {
+    await sequelize.authenticate();
+    console.log('Database connection has been established successfully.');
+  } catch (error) {
+    console.error('Unable to connect to the database:', error);
+    throw error;
+  }
+};
+
+module.exports = { 
+  sequelize,
+  User, 
+  Pet, 
+  Playdate, 
+  Post, 
+  Comment, 
+  PetPlaydate,
+  syncModels,
+  testDatabaseConnection
+};

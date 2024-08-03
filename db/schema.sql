@@ -1,18 +1,29 @@
-DROP DATABASE IF EXISTS unleashed;
-CREATE DATABASE unleashed;
+-- Drop the database if it exists
+DROP DATABASE IF EXISTS unleashed_db;
 
-CREATE DATABASE database_development;
+-- Create the database
+CREATE DATABASE unleashed_db;
 
+-- Connect to the database
 \c unleashed_db;
 
+-- Create users table
 CREATE TABLE users (
-  id INTEGER NOT NULL,
-  product_name VARCHAR(30) NOT NULL,
+  id SERIAL PRIMARY KEY,
+  first_name VARCHAR(30) NOT NULL,
   last_name VARCHAR(30) NOT NULL,
-  username VARCHAR (30) NOT NULL,
-  password VARCHAR (30) NOT NULL
+  username VARCHAR(30) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL  -- Increased length for hashed passwords
 );
 
-ALTER TABLE "pets"
-ADD PRIMARY KEY ("id");
+-- Create pets table
+CREATE TABLE pets (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(50) NOT NULL,
+  species VARCHAR(30) NOT NULL,
+  breed VARCHAR(50),
+  age INTEGER,
+  owner_id INTEGER REFERENCES users(id)
+);
 
+-- Add more tables as needed (e.g., playdates, posts, comments)
