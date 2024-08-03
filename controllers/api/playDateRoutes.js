@@ -1,11 +1,6 @@
 const router = require('express').Router();
-<<<<<<< HEAD
-const Pet = require('../../models/pets');
-const PlayDate = require('../../models/playdates');
-=======
 const { Pet, Playdate, PetPlaydate, User } = require('../../models');
 const { authenticateUser } = require('../../utils/auth');
->>>>>>> 1742b42aace0592200a2be90a4f4a1e11c4b8f29
 
 // Route to render the schedule play date form
 router.get('/schedule', authenticateUser, async (req, res) => {
@@ -46,8 +41,6 @@ router.post('/schedule', authenticateUser, async (req, res) => {
     }
 });
 
-<<<<<<< HEAD
-=======
 // Route to get all playdates for the logged-in user
 router.get('/', authenticateUser, async (req, res) => {
     try {
@@ -81,5 +74,4 @@ router.get('/', authenticateUser, async (req, res) => {
     }
 });
 
->>>>>>> 1742b42aace0592200a2be90a4f4a1e11c4b8f29
 module.exports = router;

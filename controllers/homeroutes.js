@@ -159,7 +159,7 @@ router.post(`/add-pet/:id`, async (req, res) => {
 
 router.get('/create-post/:id', async (req, res) => {
     try {
-        await res.render('new-post');
+        await res.render('create-post');
          } catch (err) {
         console.log("error: ", err)
          };
