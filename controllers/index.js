@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const homeRoutes = require('./homeroutes');
 const petRoutes = require('./api/petRoutes');
-const playDateRoutes = require('./playDateRoutes');
+const playDateRoutes = require('./api/playDateRoutes');
 const uploadController = require('./uploadController');
 
 // Use homeRoutes for root path and login
