@@ -1,15 +1,15 @@
 const router = require('express').Router();
 const homeRoutes = require('./homeroutes');
-const petRoutes = require('./api/petRoutes');
-const playDateRoutes = require('./playDateRoutes');
+const apiRoutes = require('./api');
 const uploadController = require('./uploadController');
 
 // Use homeRoutes for root path and login
 router.use('/', homeRoutes);
 
 // API routes
-router.use('/api/pets', petRoutes);
-router.use('/api/playdates', playDateRoutes);
+router.use('/api', apiRoutes);
+
+// Upload route (consider moving this to API routes if it's an API endpoint)
 router.use('/api/upload', uploadController);
 
 // Catch-all for any other routes
