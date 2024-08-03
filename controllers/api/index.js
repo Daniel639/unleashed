@@ -7,6 +7,6 @@ const playdateRoutes = require('./playdateRoutes.js');
 router.use('/pets', petRoutes);
 router.use('/posts', postRoutes);
 router.use('/comments', commentRoutes);
-router.use('/playdates', playDateRoutes);
+router.use('/playdates', playdateRoutes);
 
 module.exports = router;
