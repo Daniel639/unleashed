@@ -36,6 +36,7 @@ const userAuth = (req, res, next) => {
     if (!req.session.loggedIn) {
         res.status(401).json({ message: 'Unauthorized. Please log in.' });
     } else {
+        req.user_id = req.session.user_id;
         next();
     }
 };
