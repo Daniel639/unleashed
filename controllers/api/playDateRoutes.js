@@ -1,9 +1,8 @@
 const router = require('express').Router();
 const { Pet, Playdate, PetPlaydate, User } = require('../../models');
-const { authenticateUser } = require('../../utils/auth');
-
+const { userAuth } = require('../../utils/auth');
 // Route to render the schedule play date form
-router.get('/schedule', authenticateUser, async (req, res) => {
+router.get('/schedule', userAuth, async (req, res) => {
     try {
         const pets = await Pet.findAll({
             where: { user_id: req.session.user_id }
@@ -16,7 +15,7 @@ router.get('/schedule', authenticateUser, async (req, res) => {
 });
 
 // Route to handle play date scheduling form submission
-router.post('/schedule', authenticateUser, async (req, res) => {
+router.post('/schedule', userAuth, async (req, res) => {
     const { pet1Id, pet2Id, date, location } = req.body;
 
     if (!pet1Id || !pet2Id || !date || !location) {
@@ -42,7 +41,7 @@ router.post('/schedule', authenticateUser, async (req, res) => {
 });
 
 // Route to get all playdates for the logged-in user
-router.get('/', authenticateUser, async (req, res) => {
+router.get('/', userAuth, async (req, res) => {
     try {
         const user = await User.findByPk(req.session.user_id, {
             include: [
