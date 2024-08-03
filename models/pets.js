@@ -14,7 +14,6 @@ Pet.init(
         primaryKey: true,
         autoIncrement: true
     },
-    
     user_id: {
       type: DataTypes.INTEGER,
       references: {
@@ -39,6 +38,9 @@ Pet.init(
         type: DataTypes.STRING
       },
       bio: {
+        type: DataTypes.STRING
+      },
+      url: {
         type: DataTypes.STRING
       }
   },

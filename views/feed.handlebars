@@ -1,11 +1,12 @@
  <div class="feed">
+     <a href="javascript:history.back()" class="back-button">Back to My profile</a></br>
             {{#each posts as |post|}}
             <div class="post-container">
                 <div class="post-card">
                     <header class="post-header">
                         <img src="https://via.placeholder.com/50" alt="User avatar" class="avatar">
                         <span class="username">{{pet.name}}</span>
-                        <a href="/schedule-playdate" class="schedule-btn">schedule playdate</a>
+                        <a href="/schedule-playdate" class="schedule-btn" class="pet-action-btn">schedule playdate</a>
                     </header>
                     <div class="post">
                         <img src="https://via.placeholder.com/400x300" alt="Post image" class="post-image">
