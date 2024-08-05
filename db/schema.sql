@@ -26,4 +26,3 @@ CREATE TABLE pets (
   owner_id INTEGER REFERENCES users(id)
 );
 
--- Add more tables as needed (e.g., playdates, posts, comments)
