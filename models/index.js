@@ -67,9 +67,19 @@ const syncModels = async () => {
       return;
     }
 
+    console.log('Starting model synchronization...');
     // Sync all models
     await sequelize.sync({ alter: true });
     console.log('All models were synchronized successfully.');
+
+    // Log the current structure of the pets table
+    const [results] = await sequelize.query(`
+      SELECT column_name, data_type 
+      FROM information_schema.columns 
+      WHERE table_name = 'pets';
+    `);
+    console.log('Current structure of pets table:', results);
+    
   } catch (error) {
     console.error('An error occurred while synchronizing the models:', error);
     throw error; // Rethrow the error to be handled by the calling function

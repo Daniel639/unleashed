@@ -32,7 +32,8 @@ Pet.init(
     },
     // Will become `is_paperback` in table due to `underscored` flag
     age: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      allowNull:true 
     },
     gender: {
         type: DataTypes.STRING
@@ -47,7 +48,6 @@ Pet.init(
   {
     // Link to database connection
     sequelize,
-    // Set to false to remove `created_at` and `updated_at` fields
     timestamps: false,
     underscored: true,
     freezeTableName: true,
