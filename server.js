@@ -36,7 +36,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
+// Use routes
 app.use(routes);
+
+// Add a catch-all route for any unmatched routes
+app.use((req, res) => {
+  res.status(404).json({ message: 'Route not found' });
+});
+
+// Error handling middleware
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ message: 'Server error' });
+});
 
 const startServer = async () => {
   try {
